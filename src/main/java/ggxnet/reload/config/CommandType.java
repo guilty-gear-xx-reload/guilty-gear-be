@@ -1,12 +1,11 @@
-package ggxnet.reload;
+package ggxnet.reload.config;
 
-public enum State {
+public enum CommandType {
     ENTER,
     READ,
     LEAVE,
     REPUP,
     REPDOWN,
     REPLIST
-
 
 }
