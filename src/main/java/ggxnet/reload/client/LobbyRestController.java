@@ -25,7 +25,7 @@ class LobbyRestController {
 
     @PostMapping
     public void handlePost(HttpServletRequest httpServletRequest) {
-        lobbyService.processPost(getRequest(httpServletRequest));
+        lobbyService.processPost(getRequest(httpServletRequest),httpServletRequest.getRemoteAddr());
     }
 
     @SneakyThrows
