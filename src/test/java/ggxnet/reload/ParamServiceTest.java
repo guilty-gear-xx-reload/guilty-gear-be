@@ -1,6 +1,6 @@
 package ggxnet.reload;
 
-import ggxnet.reload.config.ParamType;
+import ggxnet.reload.shared.ParamType;
 import ggxnet.reload.service.ParamService;
 import org.junit.jupiter.api.Test;
 

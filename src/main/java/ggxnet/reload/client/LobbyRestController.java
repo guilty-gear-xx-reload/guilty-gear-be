@@ -1,4 +1,4 @@
-package ggxnet.reload.controller;
+package ggxnet.reload.client;
 
 import ggxnet.reload.service.LobbyService;
 import lombok.RequiredArgsConstructor;

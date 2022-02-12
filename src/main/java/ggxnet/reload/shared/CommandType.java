@@ -1,4 +1,4 @@
-package ggxnet.reload.config;
+package ggxnet.reload.shared;
 
 public enum CommandType {
     ENTER,

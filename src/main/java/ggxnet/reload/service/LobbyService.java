@@ -1,7 +1,7 @@
 package ggxnet.reload.service;
 
-import ggxnet.reload.config.CommandType;
-import ggxnet.reload.config.ParamType;
+import ggxnet.reload.shared.CommandType;
+import ggxnet.reload.shared.ParamType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
