@@ -1,5 +1,7 @@
 package ggxnet.reload;
 
+import ggxnet.reload.config.ParamType;
+import ggxnet.reload.service.ParamService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -13,9 +15,9 @@ class ParamServiceTest {
     @Test
     public void properly_parse_input_with_all_parameters() {
         //given
-        String input = "cmd=enter|port=10000|name=Arek|param=006100000F4|win=2";
+        String request = "cmd=enter|port=10000|name=Arek|param=006100000F4|win=2";
         //when
-        Map<ParamType, String> params = sut.calculate(input);
+        Map<ParamType, String> params = sut.calculate(request);
         //then
         assertThat(params.get(ParamType.CMD)).contains("enter");
         assertThat(params.get(ParamType.PORT)).contains("10000");
@@ -28,9 +30,9 @@ class ParamServiceTest {
     @Test
     public void properly_parse_empty_string() {
         //given
-        String input = "";
+        String request = "";
         //when
-        Map<ParamType, String> params = sut.calculate(input);
+        Map<ParamType, String> params = sut.calculate(request);
         //then
         assertThat(params).isEmpty();
     }
