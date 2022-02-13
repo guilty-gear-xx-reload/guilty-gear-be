@@ -28,13 +28,16 @@ public class Leave implements Operation {
         //lock
         var dataFile = fileService.readNodeList(configFile);
 
-        while (true) {
-            int index = fileService.findNode(params.get(NAME).concat("@").concat(address), dataFile);
+        while (true) { // nie jestem pewien czy to jest potrzebne, to jest chyba swego rodzaju zabezpieczenie przed tym że np. zdublowane są rekordy w pliku
+            String ownNode = params.get(NAME).concat("@").concat(address);
+            int index = fileService.findNode(ownNode, dataFile);
             if (index == -1) {
                 break;
             }
             dataFile.remove(index);
+            log.info("Leaved: " + ownNode);
         }
+
         fileService.saveAll(dataFile, configFile);
         //unlock
     }
