@@ -15,9 +15,10 @@ import java.util.Map;
 public class LobbyService {
     private final Map<CommandType, Operation> operations;
 
-    public void processPost(String request) {
+    public void processPost(String request, String remoteAddress) {
         var paramService = new ParamService();
         Map<ParamType, String> params = paramService.calculate(request);
+        params.put(ParamType.REMOTE_ADDRESS, remoteAddress);
         var command = CommandType.valueOf(params.get(ParamType.CMD).toUpperCase());
         log.info("Actual command: {}", command);
         operations.get(command).process(params);
