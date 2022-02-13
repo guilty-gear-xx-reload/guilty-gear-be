@@ -16,7 +16,7 @@ public class OperationConfig {
     public Map<CommandType, Operation> getOperations() {
         return Map.of(CommandType.ENTER, new Enter(configFile),
                 CommandType.LEAVE, new Leave(),
-                CommandType.READ, new Read(),
+                CommandType.READ, new Read(configFile),
                 CommandType.REPDOWN, new Repdown(),
                 CommandType.REPLIST, new Replist(),
                 CommandType.REPUP, new Repup());
