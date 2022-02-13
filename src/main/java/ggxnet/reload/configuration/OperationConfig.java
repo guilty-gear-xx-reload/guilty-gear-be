@@ -15,7 +15,7 @@ public class OperationConfig {
     @Bean
     public Map<CommandType, Operation> getOperations() {
         return Map.of(CommandType.ENTER, new Enter(configFile),
-                CommandType.LEAVE, new Leave(),
+                CommandType.LEAVE, new Leave(configFile),
                 CommandType.READ, new Read(configFile),
                 CommandType.REPDOWN, new Repdown(),
                 CommandType.REPLIST, new Replist(),

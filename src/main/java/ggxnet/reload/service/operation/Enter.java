@@ -40,6 +40,5 @@ public class Enter implements Operation {
             log.info("Added: " + newLine);
         }
         fileService.saveAll(dataFile, configFile);
-        // 140, 141 ?
     }
 }
