@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -24,8 +26,8 @@ class LobbyRestController {
     }
 
     @PostMapping
-    public void handlePost(HttpServletRequest httpServletRequest) {
-        lobbyService.processPost(getRequest(httpServletRequest),httpServletRequest.getRemoteAddr());
+    public void handlePost(HttpServletRequest httpServletRequest) throws UnknownHostException {
+        lobbyService.processPost(getRequest(httpServletRequest), InetAddress.getLocalHost().getHostAddress());
     }
 
     @SneakyThrows
