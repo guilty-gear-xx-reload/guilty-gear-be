@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=80 target/ggnlobby-java-v1.0.0.jar
+web: java -Dserver.port=$PORT -jar target/ggnlobby-java-v1.0.0.jar
