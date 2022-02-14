@@ -2,6 +2,7 @@ package ggxnet.reload.service.operation;
 
 import ggxnet.reload.service.FileService;
 import ggxnet.reload.shared.ParamType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static ggxnet.reload.shared.ParamType.*;
 
+@Slf4j
 public class Enter implements Operation {
 
     private final FileService fileService = new FileService();
@@ -32,10 +34,11 @@ public class Enter implements Operation {
         String newLine = Instant.now().getEpochSecond() + "$".concat(node).concat("%").concat(params.get(PARAM)).concat("#").concat(params.get(WIN));
         if (index != -1) {
             dataFile.set(index, newLine);
+            log.info("Updated: " + newLine);
         } else {
             dataFile.add(newLine);
+            log.info("Added: " + newLine);
         }
         fileService.saveAll(dataFile, configFile);
-        // 140, 141 ?
     }
 }
