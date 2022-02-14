@@ -26,8 +26,10 @@ class LobbyRestController {
     }
 
     @PostMapping
-    public void handlePost(HttpServletRequest httpServletRequest) throws UnknownHostException {
-        lobbyService.processPost(getRequest(httpServletRequest), InetAddress.getLocalHost().getHostAddress());
+    public String handlePost(HttpServletRequest httpServletRequest) throws UnknownHostException {
+        String response = lobbyService.processPost(getRequest(httpServletRequest), InetAddress.getLocalHost().getHostAddress());
+        log.info("RESPONSE {}", response);
+        return response;
     }
 
     @SneakyThrows

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Repup implements Operation {
     @Override
-    public void process(Map<ParamType, String> params) {
-
+    public String process(Map<ParamType, String> params) {
+        return "";
     }
 }
