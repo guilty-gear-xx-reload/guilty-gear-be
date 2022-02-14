@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,6 +22,11 @@ import java.util.stream.Collectors;
 class LobbyRestController {
 
     private final LobbyService lobbyService;
+    private Map<String, String> mapAddress = new HashMap<>() {{
+        put("194.181.134.122", "26.68.204.99");
+        put("88.156.215.206", "26.39.40.108");
+    }};
+
 
     @GetMapping
     public void handleGet(HttpServletRequest httpServletRequest) {
@@ -27,7 +35,8 @@ class LobbyRestController {
 
     @PostMapping
     public String handlePost(HttpServletRequest httpServletRequest) throws UnknownHostException {
-        String response = lobbyService.processPost(getRequest(httpServletRequest), InetAddress.getLocalHost().getHostAddress());
+        var ip = httpServletRequest.getHeader("x-real-ip");
+        String response = lobbyService.processPost(getRequest(httpServletRequest), mapAddress.get(ip));
         log.info("RESPONSE {}", response);
         return response;
     }
