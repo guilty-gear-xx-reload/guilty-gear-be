@@ -1,1 +1,1 @@
-web: java -Dserver.port=80 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8419
+web: java -Dserver.port=80 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8419 -jar target/*.jar
