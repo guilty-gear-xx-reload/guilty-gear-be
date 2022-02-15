@@ -1,5 +1,4 @@
 server:
   port : ${PORT:8080}
-  address: 26.68.204.99
 config:
   file: nodelist.dat
