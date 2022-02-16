@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -34,10 +33,9 @@ class LobbyRestController {
 
     @PostMapping
     public String handlePost(HttpServletRequest httpServletRequest) throws UnknownHostException {
-        var ip = Objects.isNull(httpServletRequest.getHeader("x-real-ip")) ? httpServletRequest.getRemoteAddr()
-                : httpServletRequest.getHeader("x-real-ip");
+        var ip = httpServletRequest.getRemoteAddr();
 
-        String response = lobbyService.processPost(getRequest(httpServletRequest), mapAddress.get(ip));
+        String response = lobbyService.processPost(getRequest(httpServletRequest),ip);
         log.info("RESPONSE {}", response);
         return response;
     }
