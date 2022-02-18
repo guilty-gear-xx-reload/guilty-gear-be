@@ -3,3 +3,9 @@ server:
   #address: 26.68.204.99
 config:
   file: nodelist.dat
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: players

@@ -1,9 +1,9 @@
-package ggxnet.reload.service.operation;
+package ggxnet.reload.lobby;
 
 import ggxnet.reload.shared.ParamType;
 
 import java.util.Map;
 
-public interface Operation {
+interface Operation {
     String process(Map<ParamType, String> params);
 }

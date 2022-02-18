@@ -1,6 +1,5 @@
-package ggxnet.reload.service.operation;
+package ggxnet.reload.lobby;
 
-import ggxnet.reload.service.FileService;
 import ggxnet.reload.shared.ParamType;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 import static ggxnet.reload.shared.ParamType.*;
 
 @Slf4j
-public class Leave implements Operation {
+class Leave implements Operation {
 
     private final FileService fileService = new FileService();
     private final String configFile;

@@ -1,54 +1,35 @@
 package ggxnet.reload.client;
 
-import ggxnet.reload.service.LobbyService;
+import ggxnet.reload.lobby.port.incoming.LobbyServicePort;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import static ggxnet.reload.shared.RequestUtil.getRequest;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 class LobbyRestController {
-
-    private final LobbyService lobbyService;
-    private Map<String, String> mapAddress = new HashMap<>() {{
-        put("194.181.134.122", "26.68.204.99");
-        put("88.156.215.206", "26.39.40.108");
-    }};
-
+    private final LobbyServicePort lobbyServicePort;
 
     @GetMapping
-    public void handleGet(HttpServletRequest httpServletRequest) {
-        lobbyService.processGet(getRequest(httpServletRequest));
+    public String handleGet(HttpServletRequest httpServletRequest) {
+        lobbyServicePort.processGet(getRequest(httpServletRequest));
+        return "Server works!";
     }
 
     @PostMapping
-    public String handlePost(HttpServletRequest httpServletRequest) throws UnknownHostException {
+    public String handlePost(HttpServletRequest httpServletRequest) {
         var ip = httpServletRequest.getRemoteAddr();
-
-        String response = lobbyService.processPost(getRequest(httpServletRequest),ip);
+        String response = lobbyServicePort.processPost(getRequest(httpServletRequest), ip);
         log.info("RESPONSE {}", response);
         return response;
     }
 
-    @SneakyThrows
-    private String getRequest(HttpServletRequest httpServletRequest) {
-        var httpMethodName = httpServletRequest.getMethod();
-        log.info("--------" + httpMethodName + "--------");
-        var request = httpServletRequest.getReader()
-                .lines()
-                .collect(Collectors.joining(System.lineSeparator()));
-        log.info("Request: {}", request);
-        return request;
-    }
 
 }

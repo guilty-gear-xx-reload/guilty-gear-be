@@ -1,4 +1,4 @@
-package ggxnet.reload.service;
+package ggxnet.reload.lobby;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
-public class FileService {
+class FileService {
 
     public List<String> readNodeList(String configFile) {
         File file = new File(configFile);

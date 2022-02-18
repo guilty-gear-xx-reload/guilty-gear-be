@@ -1,10 +1,10 @@
-package ggxnet.reload.service.operation;
+package ggxnet.reload.lobby;
 
 import ggxnet.reload.shared.ParamType;
 
 import java.util.Map;
 
-public class Repup implements Operation {
+class Replist implements Operation {
     @Override
     public String process(Map<ParamType, String> params) {
         return "";
