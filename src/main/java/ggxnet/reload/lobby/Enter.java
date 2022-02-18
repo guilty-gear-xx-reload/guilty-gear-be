@@ -4,7 +4,7 @@ import ggxnet.reload.shared.ParamType;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
 import static ggxnet.reload.shared.ParamType.*;
 
@@ -23,16 +23,16 @@ class Enter implements Operation {
             return "";
         }
         String address = params.get(REMOTE_ADDRESS).concat(":").concat(params.get(PORT));
-        Optional<Player> optionalPlayer = playerRepository.findByPortAndAddress(params.get(PORT), params.get(REMOTE_ADDRESS));
-        if (optionalPlayer.isPresent()) {
-            Player player = optionalPlayer.get();
-            player.updateTime();
-            log.info("Updated: " + player.getName());
-            playerRepository.save(player);
+        Player optionalPlayer = playerRepository.findByName(params.get(NAME));
+        if (Objects.nonNull(optionalPlayer)) {
+            optionalPlayer.setStatus(true);
+            optionalPlayer.updateTime();
+            playerRepository.save(optionalPlayer);
+            log.info("Updated: " + optionalPlayer.getName());
         } else {
-            Player newPlayer = new Player(params.get(NAME), params.get(REMOTE_ADDRESS), params.get(NAME), params.get(PORT), params.get(PARAM), params.get(WIN));
-            log.info("Added: " + newPlayer.getName());
+            Player newPlayer = new Player(params.get(NAME), params.get(REMOTE_ADDRESS), params.get(PORT), params.get(PARAM), params.get(WIN));
             playerRepository.save(newPlayer);
+            log.info("Added: " + newPlayer.getName());
         }
 
         return "##head##" + address + "##foot##\r\n";

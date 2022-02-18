@@ -2,8 +2,11 @@ package ggxnet.reload.lobby;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 interface PlayerRepository extends MongoRepository<Player, String> {
-    Optional<Player> findByPortAndAddress(String port, String address);
+    Player findByName(String name);
+    List<Player> findAllByStatus(boolean status);
+
+    boolean existsByAddress(String address);
 }
