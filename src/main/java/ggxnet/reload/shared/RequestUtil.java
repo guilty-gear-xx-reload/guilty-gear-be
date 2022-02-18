@@ -12,11 +12,10 @@ public class RequestUtil {
     private RequestUtil() {
     }
 
-
     public static String getRequest(HttpServletRequest httpServletRequest) {
         var httpMethodName = httpServletRequest.getMethod();
         log.info("--------" + httpMethodName + "--------");
-        BufferedReader reader = null;
+        BufferedReader reader;
         try {
             reader = httpServletRequest.getReader();
         } catch (IOException e) {

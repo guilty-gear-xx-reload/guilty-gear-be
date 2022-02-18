@@ -1,21 +1,15 @@
 package ggxnet.reload.lobby;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 
-@Document
 @Getter
-@Setter
 @ToString
-@NoArgsConstructor
-class Player {
-    @Id
+@AllArgsConstructor
+class Player implements PlayerData {
     private String id;
     private String name;
     private String address;
@@ -35,6 +29,18 @@ class Player {
         this.time = Instant.now().getEpochSecond();
     }
 
+    public static Player of(PlayerData optionalPlayer) {
+        return new Player(optionalPlayer.getId(),
+                optionalPlayer.getName(),
+                optionalPlayer.getAddress(),
+                optionalPlayer.getPort(),
+                optionalPlayer.getParam(),
+                optionalPlayer.isStatus(),
+                optionalPlayer.getWin(),
+                optionalPlayer.getTime()
+        );
+    }
+
     public void updateTime() {
         this.time = Instant.now().getEpochSecond();
     }
@@ -50,5 +56,9 @@ class Player {
                 .concat("#")
                 .concat(win)
                 .concat("\r\n");
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

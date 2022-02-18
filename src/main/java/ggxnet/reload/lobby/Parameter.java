@@ -1,5 +1,5 @@
-package ggxnet.reload.shared;
+package ggxnet.reload.lobby;
 
-public enum ParamType {
+enum Parameter {
     CMD, NAME, SIZE, PORT, PARAM, WIN, REMOTE_ADDRESS
 }

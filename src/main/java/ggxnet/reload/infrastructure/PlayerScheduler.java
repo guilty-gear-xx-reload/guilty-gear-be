@@ -1,4 +1,4 @@
-package ggxnet.reload.lobby;
+package ggxnet.reload.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,19 +12,19 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class PlayerScheduler {
+class PlayerScheduler {
 
-    private final PlayerRepository playerRepository;
+    private final PlayerMongoRepository playerMongoRepository;
 
     @Scheduled(fixedDelay = 30, timeUnit = SECONDS)
     public void deactivateNonActivePlayers() {
-        playerRepository.findAllByStatus(true)
+        playerMongoRepository.findAllByStatus(true)
                 .stream()
                 .filter(player -> player.getTime() + 300 < Instant.now().getEpochSecond())
-                .forEach(p -> {
-                    p.setStatus(false);
-                    playerRepository.save(p);
-                    log.info("{} was deactivated", p);
+                .forEach(playerEntity -> {
+                    playerEntity.setStatus(false);
+                    playerMongoRepository.save(playerEntity);
+                    log.info("{} was deactivated", playerEntity);
                 });
     }
 
