@@ -5,7 +5,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://admin:PJCjbCBzze7mgDEm@players.blcmt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      uri: ${MONGODB_URI}
       #host: localhost
       #port: 27017
       #database: players

@@ -35,4 +35,3 @@ build/
 .mvn
 mvnw
 mvnw.cmd
-nodelist.dat
