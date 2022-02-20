@@ -1,6 +1,6 @@
 server:
   port : 80
-  address: 26.68.204.99
+  #address: 26.68.204.99
   #address: 26.39.40.108
 spring:
   data:
