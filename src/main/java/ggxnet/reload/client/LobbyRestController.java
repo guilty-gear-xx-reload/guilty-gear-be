@@ -25,8 +25,7 @@ class LobbyRestController {
 
     @PostMapping
     public String handlePost(HttpServletRequest httpServletRequest) {
-        var ip = httpServletRequest.getRemoteAddr();
-        String response = lobbyServicePort.processPost(getRequest(httpServletRequest), ip);
+        String response = lobbyServicePort.processPost(getRequest(httpServletRequest));
         log.info("\nRESPONSE\n {}", response);
         return response;
     }

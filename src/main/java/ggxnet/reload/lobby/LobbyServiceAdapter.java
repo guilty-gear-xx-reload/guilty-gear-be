@@ -17,11 +17,10 @@ class LobbyServiceAdapter implements LobbyServicePort {
     private final PlayerRepositoryPort playerRepositoryPort;
 
     @Override
-    public String processPost(String parsedRequest, String remoteAddress) {
+    public String processPost(String parsedRequest) {
         log.info("REQUEST {}", parsedRequest);
         var paramService = new ParameterService();
         Map<Parameter, String> params = paramService.calculate(parsedRequest);
-        params.put(Parameter.REMOTE_ADDRESS, remoteAddress);
         var command = CommandType.valueOf(params.get(Parameter.CMD).toUpperCase());
         log.info("Actual command: {}", command);
         switch (command) {
@@ -59,7 +58,7 @@ class LobbyServiceAdapter implements LobbyServicePort {
         if (port < 1000 || port > 65535) {
             return "";
         }
-        String address = params.get(REMOTE_ADDRESS).concat(":").concat(params.get(PORT));
+        String address = params.get(RADMINADDRESS).concat(":").concat(params.get(PORT));
         PlayerData optionalPlayer = playerRepositoryPort.findByName(params.get(NAME));
         if (Objects.nonNull(optionalPlayer)) {
             Player player = Player.of(optionalPlayer);
@@ -68,7 +67,7 @@ class LobbyServiceAdapter implements LobbyServicePort {
             playerRepositoryPort.save(player);
             log.info("Updated: " + optionalPlayer.getName());
         } else {
-            Player newPlayer = new Player(params.get(NAME), params.get(REMOTE_ADDRESS), params.get(PORT), params.get(PARAM), params.get(WIN));
+            Player newPlayer = new Player(params.get(NAME), params.get(RADMINADDRESS), params.get(PORT), params.get(PARAM), params.get(WIN));
             playerRepositoryPort.save(newPlayer);
             log.info("Added: " + newPlayer.getName());
         }
@@ -77,7 +76,7 @@ class LobbyServiceAdapter implements LobbyServicePort {
     }
 
     public String handleLeave(Map<Parameter, String> params) {
-        if (playerRepositoryPort.existsByAddress(params.get(REMOTE_ADDRESS))) {
+        if (playerRepositoryPort.existsByAddress(params.get(RADMINADDRESS))) {
             log.info("Leaved: " + params.get(NAME));
         }
         var optionalPlayer = playerRepositoryPort.findByName(params.get(NAME));
