@@ -1,5 +1,13 @@
 server:
   port : 80
   #address: 26.68.204.99
-config:
-  file: nodelist.dat
+  #address: 26.39.40.108
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:PJCjbCBzze7mgDEm@players.blcmt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      #host: localhost
+      #port: 27017
+      #database: players
+      #username: admin
+      #password: PJCjbCBzze7mgDEm
