@@ -6,8 +6,3 @@ spring:
   data:
     mongodb:
       uri: ${MONGODB_URI}
-      #host: localhost
-      #port: 27017
-      #database: players
-      #username: admin
-      #password: PJCjbCBzze7mgDEm
