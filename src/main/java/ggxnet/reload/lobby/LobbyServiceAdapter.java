@@ -1,7 +1,7 @@
 package ggxnet.reload.lobby;
 
-import ggxnet.reload.lobby.port.outgoing.PlayerRepositoryPort;
 import ggxnet.reload.lobby.port.incoming.LobbyServicePort;
+import ggxnet.reload.lobby.port.outgoing.PlayerRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +18,7 @@ class LobbyServiceAdapter implements LobbyServicePort {
 
     @Override
     public String processPost(String parsedRequest, String remoteAddress) {
+        log.info("REQUEST {}", parsedRequest);
         var paramService = new ParameterService();
         Map<Parameter, String> params = paramService.calculate(parsedRequest);
         params.put(Parameter.REMOTE_ADDRESS, remoteAddress);
