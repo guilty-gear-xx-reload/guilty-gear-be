@@ -4,17 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.util.StringUtils;
-
-import javax.validation.Valid;
 
 @Controller
 @Slf4j
-@Validated
 @RequiredArgsConstructor
 class RegistrationController {
     private final RegistrationService registrationService;
@@ -27,14 +24,15 @@ class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute @Valid UserDTO user, Model model) {
+    public String registerUser(@ModelAttribute UserDTO user, Model model, RedirectAttributes redirectAttributes) {
         if (StringUtils.isEmptyOrWhitespace(user.getName()) || StringUtils.isEmptyOrWhitespace(user.getPassword())) {
             model.addAttribute("errorMessage", "Username or password cannot be empty");
             model.addAttribute("user", user);
             return "/registration";
         }
         registrationService.registerUser(user);
-        return "/login";
+        redirectAttributes.addFlashAttribute("userName", user.getName());
+        return "redirect:/login";
     }
 
 }
