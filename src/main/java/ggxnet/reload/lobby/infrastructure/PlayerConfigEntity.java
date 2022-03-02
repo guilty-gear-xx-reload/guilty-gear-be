@@ -70,6 +70,7 @@ class PlayerConfigEntity implements PlayerConfigData {
                 .watchMaxNodesEnable(playerConfigData.isWatchReplayEnable())
                 .watchMaxNodesEnable(playerConfigData.isWatchMaxNodesEnable())
                 .active(playerConfigData.isActive())
+                .lastActivity(playerConfigData.getLastActivity())
                 .build();
     }
 

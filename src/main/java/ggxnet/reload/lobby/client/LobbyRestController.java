@@ -1,5 +1,6 @@
 package ggxnet.reload.lobby.client;
 
+import ggxnet.reload.lobby.client.command.EnterCommand;
 import ggxnet.reload.lobby.client.command.PlayerIdCommand;
 import ggxnet.reload.lobby.domain.port.incoming.PlayerConfigServicePort;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ class LobbyRestController {
     }
 
     @PostMapping("/enter")
-    public String enter(@RequestBody PlayerIdCommand command) {
+    public String enter(@RequestBody EnterCommand command) {
         return playerConfigServicePort.enter(command);
     }
 

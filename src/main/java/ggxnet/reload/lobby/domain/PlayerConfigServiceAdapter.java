@@ -1,5 +1,6 @@
 package ggxnet.reload.lobby.domain;
 
+import ggxnet.reload.lobby.client.command.EnterCommand;
 import ggxnet.reload.lobby.client.command.PlayerConfigCommand;
 import ggxnet.reload.lobby.client.command.PlayerIdCommand;
 import ggxnet.reload.lobby.domain.port.incoming.PlayerConfigServicePort;
@@ -20,9 +21,10 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
     @Override
     public String read(PlayerIdCommand command) {
         StringBuilder playersToString = new StringBuilder();
-        List<PlayerConfigData> playersConfig = playerConfigRepositoryPort.findAll().stream()
+        List<PlayerConfigData> playersConfig = playerConfigRepositoryPort.findAll()
+                .stream()
                 .filter(playerConfigData -> !playerConfigData.getId().equals(command.getPlayerId()))
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
         for (PlayerConfigData playerConfigData : playersConfig) {
             PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
             playersToString.append(playerConfig.parseToString());
@@ -31,10 +33,10 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
     }
 
     @Override
-    public String enter(PlayerIdCommand command) {
+    public String enter(EnterCommand command) {
         PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(command.getPlayerId());
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
-        playerConfig.activatePlayer();
+        playerConfig.activatePlayer(command.getPort());
         playerConfigRepositoryPort.save(playerConfig);
         log.info("Updated: " + playerConfig.getUserName());
         return playerConfig.getScriptAddress().concat(":").concat(String.valueOf(playerConfig.getPort()));
@@ -71,7 +73,6 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
         PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(playerId);
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
         return playerConfig.parseToConfigString();
-//120|26.68.204.99|ArekTest|null|1|10000|4|1|1|3|1|1|1|10|6|3600|13|6|10|0|null|0|5|TEST|1|0|0|1|
     }
 
 

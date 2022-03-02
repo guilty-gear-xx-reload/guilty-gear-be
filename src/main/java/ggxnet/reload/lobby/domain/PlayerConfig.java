@@ -115,7 +115,6 @@ class PlayerConfig implements PlayerConfigData {
                 "|" + userName +
                 "|" + trip +
                 "|" + getBooleanValue(enableNet) +
-                "|" + port +
                 "|" + delay +
                 "|" + getBooleanValue(ignoreMissNode) +
                 "|" + getBooleanValue(ignoreSlow) +
@@ -155,8 +154,9 @@ class PlayerConfig implements PlayerConfigData {
     }
 
 
-    public void activatePlayer() {
+    public void activatePlayer(Integer port) {
         this.active = true;
         this.lastActivity = Instant.now().getEpochSecond();
+        this.port = port;
     }
 }
