@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,7 +20,9 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
     @Override
     public String read(PlayerIdCommand command) {
         StringBuilder playersToString = new StringBuilder();
-        List<PlayerConfigData> playersConfig = playerConfigRepositoryPort.findAll();
+        List<PlayerConfigData> playersConfig = playerConfigRepositoryPort.findAll().stream()
+                .filter(playerConfigData -> !playerConfigData.getId().equals(command.getPlayerId()))
+                .collect(Collectors.toList());;
         for (PlayerConfigData playerConfigData : playersConfig) {
             PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
             playersToString.append(playerConfig.parseToString());
