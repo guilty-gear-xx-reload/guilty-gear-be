@@ -10,7 +10,7 @@ public interface PlayerConfigServicePort {
 
     String enter(EnterCommand command);
 
-    String leave(PlayerIdCommand command);
+    void leave(PlayerIdCommand command);
 
     void createConfig(PlayerConfigCommand command);
 

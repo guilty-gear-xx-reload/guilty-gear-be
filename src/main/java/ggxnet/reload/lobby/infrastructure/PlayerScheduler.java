@@ -20,7 +20,7 @@ class PlayerScheduler {
     public void deactivateNonActivePlayers() {
         playerConfigMongoRepository.findAllByActive(true)
                 .stream()
-                .filter(player -> player.getLastActivity() + 300 < Instant.now().getEpochSecond())
+                .filter(player -> player.getLastActivity() + 180 < Instant.now().getEpochSecond())
                 .forEach(playerEntity -> {
                     playerEntity.deactivate();
                     playerConfigMongoRepository.save(playerEntity);

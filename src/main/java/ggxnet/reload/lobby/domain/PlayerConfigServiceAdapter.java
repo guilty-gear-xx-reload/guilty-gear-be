@@ -24,6 +24,7 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
         List<PlayerConfigData> playersConfig = playerConfigRepositoryPort.findAll()
                 .stream()
                 .filter(playerConfigData -> !playerConfigData.getId().equals(command.getPlayerId()))
+                .filter(PlayerConfigData::isActive)
                 .collect(Collectors.toList());
         for (PlayerConfigData playerConfigData : playersConfig) {
             PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
@@ -44,17 +45,11 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
 
 
     @Override
-    public String leave(PlayerIdCommand command) {
-/*        if (playerRepositoryPort.existsByAddress(command.getRadminAddress())) {
-            log.info("Leaved: " + command.getName());
-        }
-        var optionalPlayer = playerRepositoryPort.findByName(command.getName());
-        if (Objects.nonNull(optionalPlayer)) {
-            Player player = Player.of(optionalPlayer);
-            player.setStatus(false);
-            playerRepositoryPort.save(player);
-        }*/
-        return "";
+    public void leave(PlayerIdCommand command) {
+        PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(command.getPlayerId());
+        PlayerConfig player = PlayerConfig.of(playerConfigData);
+        player.deactivate();
+        playerConfigRepositoryPort.save(player);
     }
 
     @Override

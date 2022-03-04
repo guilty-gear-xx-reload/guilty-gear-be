@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class PlayerIdCommand {
     private String playerId;
-    private Integer port;
 }

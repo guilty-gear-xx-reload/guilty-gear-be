@@ -59,6 +59,7 @@ class PlayerConfig implements PlayerConfigData {
                 .watchReplayEnable(playerConfigData.isWatchReplayEnable())
                 .watchMaxNodesEnable(playerConfigData.isWatchMaxNodesEnable())
                 .active(playerConfigData.isActive())
+                .lastActivity(playerConfigData.getLastActivity())
                 .build();
     }
 
@@ -153,10 +154,13 @@ class PlayerConfig implements PlayerConfigData {
         this.stats = stats;
     }
 
-
     public void activatePlayer(Integer port) {
         this.active = true;
         this.lastActivity = Instant.now().getEpochSecond();
         this.port = port;
+    }
+
+    public void deactivate() {
+        this.active = false;
     }
 }

@@ -27,8 +27,8 @@ class LobbyRestController {
     }
 
     @PostMapping("/leave")
-    public String leave(@RequestBody PlayerIdCommand command) {
-        return playerConfigServicePort.leave(command);
+    public void leave(@RequestBody PlayerIdCommand command) {
+        playerConfigServicePort.leave(command);
     }
 
     @PostMapping("/read")

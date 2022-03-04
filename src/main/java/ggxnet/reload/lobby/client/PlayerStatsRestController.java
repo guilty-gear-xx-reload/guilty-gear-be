@@ -16,21 +16,18 @@ class PlayerStatsRestController {
     private final PlayerStatsServicePort playerStatsServicePort;
 
     @PostMapping("/win")
-    public String addWin(@RequestBody PlayerIdCommand command) {
+    public void addWin(@RequestBody PlayerIdCommand command) {
         playerStatsServicePort.addWin(command.getPlayerId());
-        return "";
     }
 
     @PostMapping("/lose")
-    public String addLose(@RequestBody PlayerIdCommand command) {
+    public void addLose(@RequestBody PlayerIdCommand command) {
         playerStatsServicePort.addLose(command.getPlayerId());
-        return "";
     }
 
     @PostMapping("/draw")
-    public String addDraw(@RequestBody PlayerIdCommand command) {
+    public void addDraw(@RequestBody PlayerIdCommand command) {
         playerStatsServicePort.addDraw(command.getPlayerId());
-        return "";
     }
 
 }
