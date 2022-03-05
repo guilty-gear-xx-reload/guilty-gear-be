@@ -3,12 +3,10 @@ package ggxnet.reload.lobby.domain;
 import ggxnet.reload.lobby.domain.projection.PlayerStatsData;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
 
 @Getter
 @Builder
 class PlayerStats implements PlayerStatsData {
-    @Id
     String id;
     int wins;
     int rank;
@@ -18,6 +16,12 @@ class PlayerStats implements PlayerStatsData {
     int totalLose;
     int totalDraw;
     int totalError;
+
+    static PlayerStats of(String id) {
+        return PlayerStats.builder()
+                .id(id)
+                .build();
+    }
 
     static PlayerStats of(PlayerStatsData stats) {
         return PlayerStats.builder()
@@ -33,18 +37,18 @@ class PlayerStats implements PlayerStatsData {
                 .build();
     }
 
-    void addWin() {
+    void win() {
         this.wins++;
         this.totalWin++;
         this.totalBattle++;
     }
 
-    void addLose() {
+    void lose() {
         this.totalLose++;
         this.totalBattle++;
     }
 
-    void addDraw() {
+    void draw() {
         this.totalDraw++;
         this.totalBattle++;
     }

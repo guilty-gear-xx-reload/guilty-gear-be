@@ -39,7 +39,7 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
         playerConfig.activatePlayer(command.getPort());
         playerConfigRepositoryPort.save(playerConfig);
-        log.info("Updated: " + playerConfig.getUserName());
+        log.info("Player: {} entered the lobby", playerConfig.getUserName());
         return playerConfig.getScriptAddress().concat(":").concat(String.valueOf(playerConfig.getPort()));
     }
 
@@ -47,19 +47,17 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
     @Override
     public void leave(PlayerIdCommand command) {
         PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(command.getPlayerId());
-        PlayerConfig player = PlayerConfig.of(playerConfigData);
-        player.deactivate();
-        playerConfigRepositoryPort.save(player);
+        PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
+        playerConfig.deactivate();
+        playerConfigRepositoryPort.save(playerConfig);
     }
 
     @Override
     public void createConfig(PlayerConfigCommand command) {
-        PlayerStats playerStats = PlayerStats.builder()
-                .id(UUID.randomUUID().toString())
-                .build();
-        PlayerConfig playerConfig = PlayerConfig.of(command);
-        playerConfig.setId(UUID.randomUUID().toString());
-        playerConfig.setPlayerStats(playerStats);
+        String playerStatsId = UUID.randomUUID().toString();
+        PlayerStats playerStats = PlayerStats.of(playerStatsId);
+        String playerConfigId = UUID.randomUUID().toString();
+        PlayerConfig playerConfig = PlayerConfig.of(playerConfigId, command, playerStats);
         playerConfigRepositoryPort.create(playerConfig);
     }
 
@@ -69,6 +67,5 @@ class PlayerConfigServiceAdapter implements PlayerConfigServicePort {
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
         return playerConfig.parseToConfigString();
     }
-
 
 }

@@ -63,9 +63,11 @@ class PlayerConfig implements PlayerConfigData {
                 .build();
     }
 
-    public static PlayerConfig of(PlayerConfigCommand command) {
+    public static PlayerConfig of(String playerConfigId, PlayerConfigCommand command, PlayerStats playerStats) {
         return PlayerConfig.builder()
+                .id(playerConfigId)
                 .version(120)
+                .stats(playerStats)
                 .scriptAddress(command.getScriptAddress())
                 .userName(command.getUserName())
                 .trip(command.getTrip())
@@ -144,14 +146,6 @@ class PlayerConfig implements PlayerConfigData {
 
     private String getBooleanValue(boolean value) {
         return value ? "1" : "0";
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setPlayerStats(PlayerStats stats) {
-        this.stats = stats;
     }
 
     public void activatePlayer(Integer port) {

@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Collections;
-import java.util.List;
-
 @Document(collection = "stats")
 @NoArgsConstructor
 @Getter
@@ -42,18 +39,4 @@ class PlayerStatsEntity implements PlayerStatsData {
                 .build();
     }
 
-    public static List<PlayerStatsEntity> ofList(List<PlayerStatsData> xxxx) {
-        PlayerStatsData playerStats = xxxx.get(0);
-        return Collections.singletonList(PlayerStatsEntity.builder()
-                .id(playerStats.getId())
-                .wins(playerStats.getWins())
-                .rank(playerStats.getRank())
-                .score(playerStats.getScore())
-                .totalBattle(playerStats.getTotalBattle())
-                .totalWin(playerStats.getTotalWin())
-                .totalLose(playerStats.getTotalLose())
-                .totalDraw(playerStats.getTotalDraw())
-                .totalError(playerStats.getTotalError())
-                .build());
-    }
 }

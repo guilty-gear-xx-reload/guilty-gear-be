@@ -13,7 +13,7 @@ class PlayerStatsServiceAdapter implements PlayerStatsServicePort {
     public void addWin(String playerId) {
         PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(playerId);
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
-        playerConfig.getStats().addWin();
+        playerConfig.getStats().win();
         playerConfigRepositoryPort.save(playerConfig);
     }
 
@@ -21,7 +21,7 @@ class PlayerStatsServiceAdapter implements PlayerStatsServicePort {
     public void addLose(String playerId) {
         PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(playerId);
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
-        playerConfig.getStats().addLose();
+        playerConfig.getStats().lose();
         playerConfigRepositoryPort.save(playerConfig);
     }
 
@@ -29,7 +29,7 @@ class PlayerStatsServiceAdapter implements PlayerStatsServicePort {
     public void addDraw(String playerId) {
         PlayerConfigData playerConfigData = playerConfigRepositoryPort.findByPlayerId(playerId);
         PlayerConfig playerConfig = PlayerConfig.of(playerConfigData);
-        playerConfig.getStats().addDraw();
+        playerConfig.getStats().draw();
         playerConfigRepositoryPort.save(playerConfig);
     }
 }

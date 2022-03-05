@@ -1,7 +1,7 @@
 package ggxnet.reload.lobby.client;
 
-import ggxnet.reload.lobby.client.command.PlayerIdCommand;
 import ggxnet.reload.lobby.client.command.PlayerConfigCommand;
+import ggxnet.reload.lobby.client.command.PlayerIdCommand;
 import ggxnet.reload.lobby.domain.port.incoming.PlayerConfigServicePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +17,8 @@ class PlayerConfigRestController {
 
 
     @PostMapping("/set-config")
-    public String setPlayerConfig(@RequestBody PlayerConfigCommand command) {
+    public void setPlayerConfig(@RequestBody PlayerConfigCommand command) {
         playerConfigServicePort.createConfig(command);
-        return "";
     }
 
 
