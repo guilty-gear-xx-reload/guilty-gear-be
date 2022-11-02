@@ -1,6 +1,6 @@
 server:
-  port : 80
-  address: 26.68.204.99
+  port: 80
+  address: localhost
 spring:
   data:
     mongodb:

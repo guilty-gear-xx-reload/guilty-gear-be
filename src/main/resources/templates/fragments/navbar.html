@@ -1,0 +1,24 @@
+<div th:fragment="navbar">
+    <ul class="navbar">
+        <li>
+            <a th:href="@{/}" id="home">
+                <img th:src="@{/images/favicon.ico}" alt="Home"/>
+            </a>
+        </li>
+        <li><a th:href="@{/lobby}">Lobby</a></li>
+        <li><a th:href="@{/statistics}">Statistics</a></li>
+        <li><a th:href="@{/options}">Options</a></li>
+        <li><a th:href="@{/about}">About</a></li>
+    </ul>
+    <script type="text/javascript">
+        const currentLocation = location.href;
+        const menuItem = document.querySelectorAll('a');
+        const menuLength = menuItem.length
+        for (let i = 0; i<menuLength; i++) {
+            if(menuItem[i].href === currentLocation) {
+                menuItem[i].className = "active"
+            }
+        }
+    </script>
+</div>
+

@@ -1,7 +1,7 @@
 package ggxnet.reload.lobby.infrastructure;
 
-import ggxnet.reload.lobby.domain.projection.PlayerConfigData;
 import ggxnet.reload.lobby.domain.port.outgoing.PlayerConfigRepositoryPort;
+import ggxnet.reload.lobby.domain.projection.PlayerConfigData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
