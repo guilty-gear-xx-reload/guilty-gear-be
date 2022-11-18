@@ -1,13 +1,17 @@
 server:
-  context-path: /ggxxreload
   port: 80
+  servlet:
+    context-path: /ggxxreload
+
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI}
+      host: localhost
+      port: 27017
+
 logging:
   level:
-    web: DEBUG
+    web: INFO
 
 deactivate:
   time:
