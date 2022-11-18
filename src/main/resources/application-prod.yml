@@ -1,5 +1,6 @@
 server:
-  port : 80
+  context-path: /ggxxreload
+  port: 80
 spring:
   data:
     mongodb:
