@@ -12,8 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableRelMongo
 public class GGXXLobbyApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(GGXXLobbyApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(GGXXLobbyApplication.class, args);
+  }
 }
