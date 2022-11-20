@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Builder
 @AllArgsConstructor
-class PlayerStatsEntity implements PlayerStatsData {
+public class PlayerStatsEntity implements PlayerStatsData {
     @Id
     private String id;
     private int wins;

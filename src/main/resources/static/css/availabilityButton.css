@@ -1,0 +1,11 @@
+.availabilityButton {
+    border: 0
+}
+
+.availabilityButton[name="true"] {
+    background-color: #00cc00
+}
+
+.availabilityButton[name="false"] {
+    background-color: #cc0000
+}

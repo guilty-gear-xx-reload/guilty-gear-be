@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class PlayerConfigEntity implements PlayerConfigData {
+public class PlayerConfigEntity implements PlayerConfigData {
     @Id
     private String id;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

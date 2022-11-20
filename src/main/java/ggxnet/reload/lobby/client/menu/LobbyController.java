@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(path = "/lobby")
 public class LobbyController {
+
+    private final LobbyService lobbyService;
+
+    public LobbyController(LobbyService lobbyService) {
+        this.lobbyService = lobbyService;
+    }
+
     @GetMapping
     public String getLobby(Model model) {
         model.addAttribute("title", PageTitle.LOBBY);
+        model.addAttribute("playersData", lobbyService.getPlayersData());
         return "lobby";
     }
+
 }

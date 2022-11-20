@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/head :: head"></head>
-    <body>
-        <div th:replace="fragments/navbar :: navbar"></div>
-        <div class="content">
-            <table id="lobby">
-                <thead>
-                <tr>
-                    <th scope="col">player</th>
-                    <th scope="col">status</th>
-                    <th scope="col">ping</th>
-                    <th scope="col">wins</th>
-                    <th scope="col">loses</th>
-                    <th scope="col">total</th>
-                    <th scope="col">w/l</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td data-label="player">Albert</td>
-                    <td data-label="status">offline</td>
-                    <td data-label="ping">76 ms</td>
-                    <td data-label="wins">8</td>
-                    <td data-label="loses">4</td>
-                    <td data-label="total">12</td>
-                    <td data-label="w/l">2.0</td>
-                </tr>
-                <tr>
-                    <td data-label="player">Arek</td>
-                    <td data-label="status">offline</td>
-                    <td data-label="ping">56 ms</td>
-                    <td data-label="wins">6</td>
-                    <td data-label="loses">2</td>
-                    <td data-label="total">8</td>
-                    <td data-label="w/l">3.0</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </body>
-    <footer th:replace="fragments/footer :: footer"></footer>
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="content">
+    <table id="lobby">
+        <thead>
+        <tr>
+            <th scope="col">player</th>
+            <th scope="col">status</th>
+            <!--                        <th scope="col">ping</th>-->
+            <th scope="col">wins</th>
+            <th scope="col">loses</th>
+            <th scope="col">draws</th>
+            <th scope="col">total</th>
+            <th scope="col">w/l</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="playerData : ${playersData}">
+            <td th:text="${playerData.nickname}"></td>
+            <td><input th:name="${playerData.status}" type="button" class="availabilityButton"></td>
+            <td th:text="${playerData.totalWins}"></td>
+            <td th:text="${playerData.totalLoses}"></td>
+            <td th:text="${playerData.totalDraws}"></td>
+            <td th:text="${playerData.totalGames}"></td>
+            <td th:text="${playerData.winToLoses}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<footer th:replace="fragments/footer :: footer"></footer>
 </html>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/rest")
+@RequestMapping(path = "/rest") // FIXME - czytaj PlayerConfigRestController
 @RequiredArgsConstructor
 class LobbyRestController {
     private final PlayerConfigServicePort playerConfigServicePort;

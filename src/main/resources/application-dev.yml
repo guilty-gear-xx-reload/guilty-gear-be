@@ -1,6 +1,7 @@
 server:
-  #address: 26.39.40.108 #Your Radmin IP
-  address: 26.68.204.99
+  #Your Radmin IP
+  #address: 26.39.40.108
+  #address: 26.68.204.99
 
 logging:
   level:

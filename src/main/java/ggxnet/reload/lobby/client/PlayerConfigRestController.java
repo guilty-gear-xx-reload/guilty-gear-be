@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest") // FIXME - czemu tu jest w ten sposób a w LobbyRestController przez alias?
 @RequiredArgsConstructor
 class PlayerConfigRestController {
     private final PlayerConfigServicePort playerConfigServicePort;

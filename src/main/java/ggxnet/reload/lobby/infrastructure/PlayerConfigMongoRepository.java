@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-interface PlayerConfigMongoRepository extends CrudRepository<PlayerConfigEntity, String> {
+public interface PlayerConfigMongoRepository extends CrudRepository<PlayerConfigEntity, String> {
     List<PlayerConfigEntity> findAll();
 
     List<PlayerConfigEntity> findAllByActive(boolean active);
