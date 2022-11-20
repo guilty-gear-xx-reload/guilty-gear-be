@@ -8,7 +8,7 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-
+     # uri: ${MONGODB_URI} for hosting
 logging:
   level:
     web: INFO
