@@ -15,7 +15,7 @@ import org.thymeleaf.util.StringUtils;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class RegistrationController {
+class RegistrationController {
   private final RegistrationService registrationService;
 
   @GetMapping("/registration")
@@ -28,14 +28,14 @@ public class RegistrationController {
   @PostMapping("/register")
   public String registerUser(
       @ModelAttribute UserDto user, Model model, RedirectAttributes redirectAttributes) {
-    if (StringUtils.isEmptyOrWhitespace(user.getName())
-        || StringUtils.isEmptyOrWhitespace(user.getPassword())) {
+    if (StringUtils.isEmptyOrWhitespace(user.name())
+        || StringUtils.isEmptyOrWhitespace(user.password())) {
       model.addAttribute("errorMessage", "Username or password cannot be empty");
       model.addAttribute("user", user);
       return "/registration";
     }
     registrationService.registerUser(user);
-    redirectAttributes.addFlashAttribute("userName", user.getName());
+    redirectAttributes.addFlashAttribute("userName", user.name());
     return "redirect:/login";
   }
 }

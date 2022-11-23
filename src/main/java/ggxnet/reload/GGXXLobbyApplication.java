@@ -1,6 +1,5 @@
 package ggxnet.reload;
 
-import io.github.kaiso.relmongo.config.EnableRelMongo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -10,7 +9,6 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 @SpringBootApplication
 @EnableScheduling
 @EnableMongoRepositories
-@EnableRelMongo
 @EnableWebSocketMessageBroker
 public class GGXXLobbyApplication {
 

@@ -1,6 +1,9 @@
 package ggxnet.reload.repository;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import ggxnet.reload.service.PingService;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -10,19 +13,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class PingScheduler {
+class PingScheduler {
   private final PingService pingService;
   private final SimpMessagingTemplate messagingTemplate;
   private final PlayerConfigMongoRepository playerConfigMongoRepository;
 
-  @Scheduled(fixedDelay = 2_000)
-  public void getPingsOfThePlayers() {
+  @Scheduled(fixedDelayString = "${schedule.ping-players.frequency}", timeUnit = SECONDS)
+  public void pingPlayers() {
     var playersPing =
-        playerConfigMongoRepository.findAllByActive(false).stream()
+        playerConfigMongoRepository.findAllByActive(true).stream()
             .map(pingService::sendPingRequest)
-            .toList();
+            .collect(Collectors.toList());
     messagingTemplate.convertAndSend("/topic/pings", playersPing);
   }
-  // TODO  ==>  Trzeba ogarnąć czemu isReachable nie działa dla tych adresów radminowych
-  // TODO  ==>  Trzeba zaktualizować elementy na froncie. Można pomyśleć o jakimś id
 }

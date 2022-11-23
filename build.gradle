@@ -9,7 +9,7 @@ plugins {
 group = 'ggxxreload'
 version = '1.0'
 description = 'ggnlobby-java'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
@@ -21,7 +21,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
-    implementation 'io.github.kaiso.relmongo:relmongo:3.4.2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

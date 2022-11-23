@@ -1,5 +1,11 @@
 package ggxnet.reload.service.dto;
 
-public record PlayerPing(String playerId, String ping) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
+public final class PlayerPing {
+  private final String playerId;
+  private final String ping;
 }

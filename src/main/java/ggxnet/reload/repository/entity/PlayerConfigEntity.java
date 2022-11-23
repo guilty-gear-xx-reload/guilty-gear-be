@@ -1,16 +1,13 @@
 package ggxnet.reload.repository.entity;
 
 import ggxnet.reload.controller.command.PlayerConfigCommand;
-import io.github.kaiso.relmongo.annotation.CascadeType;
-import io.github.kaiso.relmongo.annotation.FetchType;
-import io.github.kaiso.relmongo.annotation.JoinProperty;
-import io.github.kaiso.relmongo.annotation.OneToOne;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "config")
@@ -20,11 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 public class PlayerConfigEntity {
   @Id private String id;
-
-  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinProperty(name = "stats")
-  private PlayerStatsEntity stats;
-
+  @DBRef private PlayerStatsEntity stats;
   private int version;
   private String scriptAddress;
   private String userName;

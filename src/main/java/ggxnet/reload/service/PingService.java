@@ -8,11 +8,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class PingService {
+
+  @Value("${schedule.ping-players.timeout}")
+  private Integer timeout;
 
   public PlayerPing sendPingRequest(PlayerConfigEntity playerConfig) {
     String ipAddress = playerConfig.getScriptAddress();
@@ -35,7 +39,7 @@ public class PingService {
 
   private boolean isAddressReachable(InetAddress inetAddress) {
     try {
-      return inetAddress.isReachable(5_000);
+      return inetAddress.isReachable(timeout);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
