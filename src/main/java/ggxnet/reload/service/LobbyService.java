@@ -1,7 +1,7 @@
 package ggxnet.reload.service;
 
 import ggxnet.reload.repository.PlayerConfigMongoRepository;
-import ggxnet.reload.service.dto.PlayerDataDto;
+import ggxnet.reload.service.dto.PlayerLobbyDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ public class LobbyService {
     this.playerConfigMongoRepository = playerConfigMongoRepository;
   }
 
-  public List<PlayerDataDto> getPlayersData() {
+  public List<PlayerLobbyDto> getPlayersLobby() {
     return playerConfigMongoRepository.findAll().stream()
-        .map(PlayerDataDto::of)
+        .map(PlayerLobbyDto::of)
         .collect(Collectors.toList());
   }
 }

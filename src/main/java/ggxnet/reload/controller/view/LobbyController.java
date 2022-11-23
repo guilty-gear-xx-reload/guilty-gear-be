@@ -19,7 +19,7 @@ public class LobbyController {
   @GetMapping
   public String getLobby(Model model) {
     model.addAttribute("title", PageTitle.LOBBY);
-    model.addAttribute("playersData", lobbyService.getPlayersData());
+    model.addAttribute("playersLobbyData", lobbyService.getPlayersLobby());
     return "lobby";
   }
 }
