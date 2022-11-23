@@ -1,4 +1,5 @@
 server:
+  address: localhost
   port: 80
   servlet:
     context-path: /ggxxreload
@@ -12,6 +13,15 @@ spring:
 logging:
   level:
     web: INFO
+
+schedule:
+  afk-players:
+    delay: 180
+    frequency: 30
+  ping-players:
+    frequency: 2
+    timeout: 5000
+
 
 deactivate:
   time:

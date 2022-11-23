@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head"></head>
+<head th:replace="fragments/head :: head">
+</head>
 <body>
+<!--js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+-->
+<script type="text/javascript" th:src="@{/js/pinger.js}"></script>
+-->
+
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="content">
     <table id="lobby">
         <thead>
         <tr>
+            <th scope="col" style="display:none;">id</th>
             <th scope="col">player</th>
             <th scope="col">status</th>
-            <!--                        <th scope="col">ping</th>-->
+            <th scope="col">ping</th>
             <th scope="col">wins</th>
             <th scope="col">loses</th>
             <th scope="col">draws</th>
@@ -18,9 +28,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="playerData : ${playersData}">
+        <tr th:each="playerData : ${playersLobbyData}">
+            <td id="playerId" th:text="${playerData.id}" style="display:none;"></td>
             <td th:text="${playerData.nickname}"></td>
             <td><input th:name="${playerData.status}" type="button" class="availabilityButton"></td>
+            <td id="ping" th:text="${playerData.ping}"></td>
             <td th:text="${playerData.totalWins}"></td>
             <td th:text="${playerData.totalLoses}"></td>
             <td th:text="${playerData.totalDraws}"></td>

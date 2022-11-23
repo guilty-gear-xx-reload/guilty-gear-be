@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 class PlayerScheduler {
   private final PlayerConfigMongoRepository playerConfigMongoRepository;
 
-  @Value("${deactivate.time.delay}")
+  @Value("${schedule.afk-players.delay}")
   private Integer delayTime;
 
-  @Scheduled(fixedDelayString = "${deactivate.time.schedule}", timeUnit = SECONDS)
-  public void deactivateNonActivePlayers() {
+  @Scheduled(fixedDelayString = "${schedule.afk-players.frequency}", timeUnit = SECONDS)
+  public void deactivatePlayers() {
     playerConfigMongoRepository.findAllByActive(true).stream()
         .filter(player -> player.getLastActivity() + delayTime < Instant.now().getEpochSecond())
         .forEach(
