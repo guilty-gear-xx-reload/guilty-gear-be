@@ -1,11 +1,19 @@
 package ggxnet.reload.service.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
 public final class PlayerPing {
   private final String playerId;
   private final String ping;
+
+  public PlayerPing(String playerId, String ping) {
+    this.playerId = playerId;
+    this.ping = ping;
+  }
+
+  public String getPlayerId() {
+    return playerId;
+  }
+
+  public String getPing() {
+    return ping;
+  }
 }

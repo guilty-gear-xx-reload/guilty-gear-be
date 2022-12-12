@@ -2,7 +2,6 @@ package ggxnet.reload.service;
 
 import ggxnet.reload.repository.UserRepository;
 import ggxnet.reload.repository.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,9 +9,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MongoUserDetailsService implements UserDetailsService {
+public class DBUserDetailsService implements UserDetailsService {
 
-  @Autowired private UserRepository customerRepository;
+  private final UserRepository customerRepository;
+
+  public DBUserDetailsService(UserRepository customerRepository) {
+    this.customerRepository = customerRepository;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

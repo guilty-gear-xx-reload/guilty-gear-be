@@ -5,11 +5,19 @@ server:
     context-path: /ggxxreload
 
 spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-     # uri: ${MONGODB_URI} for hosting
+  liquibase:
+    enabled: true
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/postgres?charSet=UTF8&currentSchema=ggxx'
+    username: admin
+    password: admin
+    driverClassName: org.postgresql.Driver
+    hikari:
+      auto-commit: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
 logging:
   level:
     web: INFO

@@ -1,8 +1,13 @@
 package ggxnet.reload.controller.command;
 
-import lombok.Data;
-
-@Data
 public class PlayerIdCommand {
   private String playerId;
+
+  public String getPlayerId() {
+    return playerId;
+  }
+
+  public void setPlayerId(String playerId) {
+    this.playerId = playerId;
+  }
 }
