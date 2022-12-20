@@ -1,19 +1,41 @@
 package ggxnet.reload.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Document
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
+@Entity
+@Table(name = "users")
 public class UserEntity {
-  @Id private String id;
+  @Id
+  private String id;
   private String username;
   private String password;
+
+  public UserEntity() {
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }

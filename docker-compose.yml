@@ -1,8 +1,12 @@
 version: "3"
 services:
-  mongodb:
-    image: mongo:5.0.0
-    container_name: mongo-db
-    restart: always
+  db:
+    image: postgres:14.0
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    container_name: postgres-db
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin

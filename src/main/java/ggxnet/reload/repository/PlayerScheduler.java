@@ -1,31 +1,34 @@
 package ggxnet.reload.repository;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import java.time.Instant;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 @Component
 @Slf4j
-@RequiredArgsConstructor
 class PlayerScheduler {
-  private final PlayerConfigMongoRepository playerConfigMongoRepository;
+  private final PlayerConfigRepository playerConfigRepository;
 
   @Value("${schedule.afk-players.delay}")
   private Integer delayTime;
 
+  PlayerScheduler(PlayerConfigRepository playerConfigRepository) {
+    this.playerConfigRepository = playerConfigRepository;
+  }
+
   @Scheduled(fixedDelayString = "${schedule.afk-players.frequency}", timeUnit = SECONDS)
   public void deactivatePlayers() {
-    playerConfigMongoRepository.findAllByActive(true).stream()
+    playerConfigRepository.findAllByActive(true).stream()
         .filter(player -> player.getLastActivity() + delayTime < Instant.now().getEpochSecond())
         .forEach(
             playerEntity -> {
               playerEntity.deactivate();
-              playerConfigMongoRepository.save(playerEntity);
+              playerConfigRepository.save(playerEntity);
               log.info("{} has been deactivated", playerEntity);
             });
   }

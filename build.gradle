@@ -3,29 +3,34 @@ plugins {
     id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'io.freefair.lombok' version '6.5.1'
-    id 'com.github.sherter.google-java-format' version '0.9'
+    id 'org.liquibase.gradle' version '2.0.4'
+  //  id 'com.github.sherter.google-java-format' version '0.9'
 }
 
 group = 'ggxxreload'
 version = '1.0'
 description = 'ggnlobby-java'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
 }
 
+
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
-
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.liquibase:liquibase-core:4.2.2'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-
-googleJavaFormat {
-    toolVersion = "1.15.0"
-}
-
+//
+//googleJavaFormat {
+//    toolVersion = "1.15.0"
+//}
+//

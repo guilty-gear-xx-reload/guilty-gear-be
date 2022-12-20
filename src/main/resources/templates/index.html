@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/head :: head"></head>
-    <body>
-        <div th:replace="fragments/navbar :: navbar"></div>
-        <div class="content">
-            Welcome to start page!
-        </div>
-    </body>
-    <footer th:replace="fragments/footer :: footer"></footer>
+<head th:replace="fragments/head :: head"></head>
+<body>
+<script type="text/javascript" th:src="@{/js/sprite_editor/init.js}"></script>
+<script type="text/javascript" th:src="@{/js/sprite_editor/characterSwitcher.js}"></script>
+<script type="text/javascript" th:src="@{/js/sprite_editor/postureSwitcher.js}"></script>
+<script type="text/javascript" th:src="@{/js/sprite_editor/spriteDrawer.js}"></script>
+<script type="text/javascript" th:src="@{/js/sprite_editor/paletteDrawer.js}"></script>
+<script type="text/javascript" th:src="@{/js/sprite_editor/colorListeners.js}"></script>
+-->
+
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="content">
+    <select id="character"></select>
+    <select id="posture"></select>
+    <canvas id="palette-canvas"></canvas>
+    <canvas id="sprite-canvas"></canvas>
+</div>
+</body>
+
+
+<footer th:replace="fragments/footer :: footer"></footer>
 </html>

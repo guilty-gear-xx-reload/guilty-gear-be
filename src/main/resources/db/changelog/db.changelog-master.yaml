@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0000000
+      author: arekg
+      comment: creates
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: scripts/initial_create.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+        id: 0000001
+        author: arekg
+        comment: creates
+        changes:
+            - sqlFile:
+                  dbms: postgresql
+                  encoding: utf8
+                  path: scripts/initial_insert.sql
+                  relativeToChangelogFile: true
+                  splitStatements: true
+                  stripComments: true

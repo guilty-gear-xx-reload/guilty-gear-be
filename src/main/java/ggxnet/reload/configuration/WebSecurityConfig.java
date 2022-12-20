@@ -1,7 +1,6 @@
 package ggxnet.reload.configuration;
 
-import ggxnet.reload.service.MongoUserDetailsService;
-import lombok.RequiredArgsConstructor;
+import ggxnet.reload.service.DBUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,9 +16,12 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-  private final MongoUserDetailsService userDetailsService;
+  private final DBUserDetailsService userDetailsService;
+
+  WebSecurityConfig(DBUserDetailsService userDetailsService) {
+    this.userDetailsService = userDetailsService;
+  }
 
   @Bean
   public PasswordEncoder passwordEncoder() {

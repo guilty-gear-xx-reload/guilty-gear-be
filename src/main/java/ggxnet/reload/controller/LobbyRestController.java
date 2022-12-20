@@ -4,16 +4,18 @@ import ggxnet.reload.controller.command.EnterCommand;
 import ggxnet.reload.controller.command.PlayerConfigCommand;
 import ggxnet.reload.controller.command.PlayerIdCommand;
 import ggxnet.reload.service.PlayerService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("/rest")
-@RequiredArgsConstructor
 class LobbyRestController {
   private final PlayerService playerService;
+
+  LobbyRestController(PlayerService playerService) {
+    this.playerService = playerService;
+  }
 
   @PostMapping("/set-config")
   public void setPlayerConfig(@RequestBody PlayerConfigCommand command) {
@@ -45,7 +47,6 @@ class LobbyRestController {
     return playerService.read(command);
   }
 
-  // todo add to c++
   @PostMapping("/win")
   public void addWin(@RequestBody PlayerIdCommand command) {
     playerService.addWin(command.getPlayerId());

@@ -8,6 +8,7 @@ nodelist.dat
 .gradle
 gradle
 build
+postgres-data
 
 ### IntelliJ IDEA ###
 .idea

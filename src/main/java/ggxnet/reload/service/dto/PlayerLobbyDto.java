@@ -2,7 +2,6 @@ package ggxnet.reload.service.dto;
 
 import ggxnet.reload.repository.entity.PlayerConfigEntity;
 import ggxnet.reload.repository.entity.PlayerStatsEntity;
-
 import java.util.Objects;
 
 public final class PlayerLobbyDto {
@@ -96,11 +95,9 @@ public final class PlayerLobbyDto {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == this)
-      return true;
-    if (obj == null || obj.getClass() != this.getClass())
-      return false;
-    var that = (PlayerLobbyDto)obj;
+    if (obj == this) return true;
+    if (obj == null || obj.getClass() != this.getClass()) return false;
+    var that = (PlayerLobbyDto) obj;
     return Objects.equals(this.id, that.id)
         && Objects.equals(this.nickname, that.nickname)
         && Objects.equals(this.status, that.status)
