@@ -1,11 +1,13 @@
 package ggxnet.reload.service;
 
+import ggxnet.reload.controller.EnterResponse;
 import ggxnet.reload.controller.command.EnterCommand;
 import ggxnet.reload.controller.command.PlayerConfigCommand;
 import ggxnet.reload.controller.command.PlayerIdCommand;
 import ggxnet.reload.repository.PlayerConfigRepository;
 import ggxnet.reload.repository.entity.PlayerConfigEntity;
 import ggxnet.reload.repository.entity.PlayerStatsEntity;
+import ggxnet.reload.service.dto.PlayerConfigDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,15 +36,16 @@ public class PlayerService {
     return playersToString.toString();
   }
 
-  public String enter(EnterCommand command) {
+  public EnterResponse enter(EnterCommand command) {
     PlayerConfigEntity playerConfigEntity = playerConfigRepository.findById(command.getPlayerId()).orElseThrow();
     playerConfigEntity.activatePlayer(command.getPort());
     playerConfigRepository.save(playerConfigEntity);
     log.info("Player: {} entered the lobby", playerConfigEntity.getUserName());
-    return playerConfigEntity
-        .getScriptAddress()
-        .concat(":")
-        .concat(String.valueOf(playerConfigEntity.getPort()));
+    return new EnterResponse(playerConfigEntity.getScriptAddress(),playerConfigEntity.getPort());
+//    return playerConfigEntity
+//        .getScriptAddress()
+//        .concat(":")
+//        .concat(String.valueOf(playerConfigEntity.getPort()));
   }
 
   public void leave(PlayerIdCommand command) {
@@ -60,11 +63,9 @@ public class PlayerService {
     playerConfigRepository.save(playerConfig);
   }
 
-  public String getPlayerConfig(String playerId) {
-    PlayerConfigEntity playerConfigEntity =
-        playerConfigRepository.findById(playerId).orElseThrow();
-
-    return playerConfigEntity.parseToConfigString();
+  public PlayerConfigDto getPlayerConfig(String playerId) {
+    PlayerConfigEntity playerConfigEntity = playerConfigRepository.findById(playerId).orElseThrow();
+    return PlayerConfigDto.of(playerConfigEntity);
   }
 
   public void addWin(String playerId) {

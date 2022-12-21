@@ -10,7 +10,6 @@ import java.time.Instant;
 public class PlayerConfigEntity {
   @Id
   private String id;
-
   @OneToOne
   @JoinColumn(name = "player_stats_id")
   private PlayerStatsEntity stats;
@@ -66,63 +65,6 @@ public class PlayerConfigEntity {
         .active(false)
         .lastActivity(0)
         .build();
-  }
-
-  public String parseToConfigString() {
-    return version
-        + "|"
-        + scriptAddress
-        + "|"
-        + userName
-        + "|"
-        + trip
-        + "|"
-        + getBooleanValue(enableNet)
-        + "|"
-        + delay
-        + "|"
-        + getBooleanValue(ignoreMissNode)
-        + "|"
-        + getBooleanValue(ignoreSlow)
-        + "|"
-        + 3
-        + "|"
-        + getBooleanValue(useEx)
-        + "|"
-        + dispInvCombo
-        + "|"
-        + getBooleanValue(fpsEnable)
-        + "|"
-        + stats.getWins()
-        + "|"
-        + stats.getRank()
-        + "|"
-        + stats.getScore()
-        + "|"
-        + stats.getTotalBattle()
-        + "|"
-        + stats.getTotalWin()
-        + "|"
-        + stats.getTotalLose()
-        + "|"
-        + stats.getTotalDraw()
-        + "|"
-        + stats.getTotalError()
-        + "|"
-        + slowRate
-        + "|"
-        + rounds
-        + "|"
-        + message
-        + "|"
-        + getBooleanValue(broadcastEnable)
-        + "|"
-        + getBooleanValue(intrusionEnable)
-        + "|"
-        + getBooleanValue(watchReplayEnable)
-        + "|"
-        + getBooleanValue(watchMaxNodesEnable)
-        + "|";
   }
 
   public String parseToString() {
