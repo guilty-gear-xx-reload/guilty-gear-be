@@ -11,14 +11,14 @@ function loadPosture(){
             serverDomain + '/palettes/' + character, // display default character
             'application/json')
         .then(responsePalette => {
-            palette = JSON.parse(responsePalette);
-            drawPalette(palette);
+            actualPalette = JSON.parse(responsePalette);
+            drawPalette(actualPalette);
             sendHttpRequest('GET',
                     serverDomain + '/sprites/' + character + '?postureId=' + posture, // display default sprite with default posture
                     'application/json')
                 .then(responseSprite => {
-                    sprite = JSON.parse(responseSprite);
-                    drawSprite(sprite, palette);
+                    actualSprite = JSON.parse(responseSprite);
+                    drawSprite(actualSprite, actualPalette);
                 })
         })
 }

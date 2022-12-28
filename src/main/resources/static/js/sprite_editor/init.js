@@ -54,14 +54,14 @@ function loadDefaultCharacterWithDefaultPosture(){
             serverDomain + '/palettes/' + defaultCharacter, // display default character
             'application/json')
         .then(responsePalette => {
-            palette = JSON.parse(responsePalette);
-            drawPalette(palette);
+            actualPalette = JSON.parse(responsePalette);
+            drawPalette(actualPalette);
             sendHttpRequest('GET',
                     serverDomain + '/sprites/Sol?postureId=' + defaultPosture, // display default sprite with default posture
                     'application/json')
                 .then(responseSprite => {
-                    sprite = JSON.parse(responseSprite);
-                    drawSprite(sprite, palette);
+                    actualSprite = JSON.parse(responseSprite);
+                    drawSprite(actualSprite, actualPalette);
                 })
         })
 }

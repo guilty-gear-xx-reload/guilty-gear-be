@@ -26,7 +26,7 @@ function drawPalette(palette) {
     }
 
     function getCssRgbaFromPaletteByIndex(index) {
-        paletteRgba = palette.rgba[index];
+        const paletteRgba = palette.rgba[index];
         return 'rgba(' + paletteRgba.r + ', ' + paletteRgba.g + ', ' + paletteRgba.b + ', 1.0)';
     }
 }

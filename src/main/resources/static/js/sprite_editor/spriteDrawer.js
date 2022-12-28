@@ -1,6 +1,4 @@
 function drawSprite(sprite, palette) {
-    drawPalette(palette);
-
     var startTime = performance.now();
     const imgWidth = sprite.width;
     const imgHeight = sprite.height;

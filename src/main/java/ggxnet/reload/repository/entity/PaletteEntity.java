@@ -27,8 +27,13 @@ public class PaletteEntity {
   private List<RGBa> colors;
   private long fileSizeInBytes;
 
-  @OneToOne(mappedBy = "palette")
+  @Enumerated(EnumType.STRING)
+  private PaletteType paletteType;
+
+  @OneToOne
+  @JoinColumn(name = "character_id")
   private CharacterEntity character;
+
 
   public PaletteEntity() {
   }
@@ -63,6 +68,14 @@ public class PaletteEntity {
 
   public void setFileSizeInBytes(long fileSizeInBytes) {
     this.fileSizeInBytes = fileSizeInBytes;
+  }
+
+  public PaletteType getPaletteType() {
+    return paletteType;
+  }
+
+  public void setPaletteType(PaletteType paletteType) {
+    this.paletteType = paletteType;
   }
 
   public CharacterEntity getCharacter() {

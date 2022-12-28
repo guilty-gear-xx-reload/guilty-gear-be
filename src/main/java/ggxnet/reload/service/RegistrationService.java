@@ -17,12 +17,12 @@ public class RegistrationService {
   }
 
   public void registerUser(UserDto newUser) {
-    if (userRepository.existsByUsername(newUser.name())) {
-      throw new UserAlreadyExistsException("User with name: " + newUser.name() + " already exists");
+    if (userRepository.existsByUsername(newUser.getName())) {
+      throw new UserAlreadyExistsException("User with name: " + newUser.getName() + " already exists");
     }
     UserEntity userEntity = new UserEntity();
-    userEntity.setUsername(newUser.name());
-    userEntity.setPassword(passwordEncoder.encode(newUser.password()));
+    userEntity.setUsername(newUser.getName());
+    userEntity.setPassword(passwordEncoder.encode(newUser.getPassword()));
     userRepository.save(userEntity);
   }
 }

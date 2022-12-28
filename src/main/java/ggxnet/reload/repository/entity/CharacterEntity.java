@@ -20,8 +20,8 @@ public class CharacterEntity {
   private String name;
   @OneToMany(mappedBy = "character")
   private List<SpriteEntity> sprites;
-  @OneToOne
-  @JoinColumn(name = "palette_id")
+
+  @OneToOne(mappedBy = "character")
   private PaletteEntity palette;
 
   public CharacterEntity() {

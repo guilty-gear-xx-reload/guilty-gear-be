@@ -1,25 +1,34 @@
 package ggxnet.reload.repository.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class UserEntity {
   @Id
-  private String id;
+  @GeneratedValue(
+          strategy = GenerationType.SEQUENCE,
+          generator = "users_seq"
+  )
+  @SequenceGenerator(
+          name = "users_seq",
+          allocationSize = 1
+  )
+  private long id;
   private String username;
   private String password;
+
+  @OneToOne(mappedBy = "user")
+  private PlayerEntity playerEntity;
 
   public UserEntity() {
   }
 
-  public String getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
   }
 

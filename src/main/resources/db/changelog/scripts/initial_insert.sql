@@ -1,3 +1,7 @@
+INSERT INTO users
+(id, password, username)
+VALUES(0, '$2a$12$2Kb5Po8vJ2JeKyNBFLQrt.iD8yElh/nUz9.Qj19JWrK.s4pl3bM7i', 'admin');
+
 INSERT INTO player_stats
 (id, "rank", score, total_battle, total_draw, total_error, total_lose, total_win, wins)
 VALUES('26b6092e-8ac8-40b4-98d2-198c511dd22c', 0, 0, 0, 0, 0, 0, 0, 0);
