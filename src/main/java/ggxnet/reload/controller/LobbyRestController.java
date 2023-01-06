@@ -4,6 +4,7 @@ import ggxnet.reload.controller.command.EnterCommand;
 import ggxnet.reload.controller.command.PlayerConfigCommand;
 import ggxnet.reload.controller.command.PlayerIdCommand;
 import ggxnet.reload.service.PlayerService;
+import ggxnet.reload.service.dto.PlayerConfigDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ class LobbyRestController {
   }
 
   @PostMapping("/get-config")
-  public String getPlayerConfig(@RequestBody PlayerIdCommand command) {
+  public PlayerConfigDto getPlayerConfig(@RequestBody PlayerIdCommand command) {
     return playerService.getPlayerConfig(command.getPlayerId());
   }
 
@@ -33,7 +34,7 @@ class LobbyRestController {
   }
 
   @PostMapping("/enter")
-  public String enter(@RequestBody EnterCommand command) {
+  public EnterResponse enter(@RequestBody EnterCommand command) {
     return playerService.enter(command);
   }
 
