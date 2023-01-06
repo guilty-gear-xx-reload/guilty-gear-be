@@ -1,6 +1,7 @@
 package ggxnet.reload.service;
 
 import ggxnet.reload.repository.PlayerConfigRepository;
+import ggxnet.reload.repository.PlayerRepository;
 import ggxnet.reload.service.dto.PlayerLobbyDto;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,14 @@ import static java.util.stream.Collectors.toList;
 public class LobbyService {
 
   public final PlayerConfigRepository playerConfigRepository;
-
-  public LobbyService(PlayerConfigRepository playerConfigRepository) {
+  public final PlayerRepository playerRepository;
+  public LobbyService(PlayerConfigRepository playerConfigRepository, PlayerRepository playerRepository) {
     this.playerConfigRepository = playerConfigRepository;
+    this.playerRepository = playerRepository;
   }
 
   public List<PlayerLobbyDto> getPlayersLobby() {
-    return playerConfigRepository.findAll().stream()
+    return playerRepository.findAll().stream()
         .map(PlayerLobbyDto::of)
         .collect(toList());
   }

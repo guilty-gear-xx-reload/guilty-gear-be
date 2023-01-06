@@ -2,7 +2,10 @@ package ggxnet.reload.repository.entity;
 
 import ggxnet.reload.controller.command.PlayerConfigCommand;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.time.Instant;
 
 @Entity
@@ -10,9 +13,8 @@ import java.time.Instant;
 public class PlayerConfigEntity {
   @Id
   private String id;
-  @OneToOne
-  @JoinColumn(name = "player_stats_id")
-  private PlayerStatsEntity stats;
+  @OneToOne(mappedBy = "config")
+  private PlayerEntity player;
   private int version;
   private String scriptAddress;
   private String userName;
@@ -39,11 +41,10 @@ public class PlayerConfigEntity {
   public PlayerConfigEntity() {
   }
 
-  public static PlayerConfigEntity of(
-      String id, PlayerConfigCommand command, PlayerStatsEntity playerStatsEntity) {
+  public static PlayerConfigEntity of(String id, PlayerConfigCommand command) {
     return PlayerConfigEntityBuilder.builder()
         .id(id)
-        .stats(playerStatsEntity)
+     //   .player() todo
         .version(120)
         .scriptAddress(command.getScriptAddress())
         .userName(command.getUserName())
@@ -67,7 +68,7 @@ public class PlayerConfigEntity {
         .build();
   }
 
-  public String parseToString() {
+  public String parseToString(PlayerStatsEntity stats) {
     return userName
         .concat("@")
         .concat(scriptAddress)
@@ -100,6 +101,14 @@ public class PlayerConfigEntity {
     this.port = port;
   }
 
+  public PlayerEntity getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(PlayerEntity player) {
+    this.player = player;
+  }
+
   public void deactivate() {
     this.active = false;
   }
@@ -110,14 +119,6 @@ public class PlayerConfigEntity {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public PlayerStatsEntity getStats() {
-    return stats;
-  }
-
-  public void setStats(PlayerStatsEntity stats) {
-    this.stats = stats;
   }
 
   public int getVersion() {
@@ -298,7 +299,7 @@ public class PlayerConfigEntity {
 
   public static final class PlayerConfigEntityBuilder {
     private String id;
-    private PlayerStatsEntity stats;
+    private PlayerEntity player;
     private int version;
     private String scriptAddress;
     private String userName;
@@ -334,8 +335,8 @@ public class PlayerConfigEntity {
       return this;
     }
 
-    public PlayerConfigEntityBuilder stats(PlayerStatsEntity stats) {
-      this.stats = stats;
+    public PlayerConfigEntityBuilder player(PlayerEntity player) {
+      this.player = player;
       return this;
     }
 
@@ -452,7 +453,7 @@ public class PlayerConfigEntity {
     public PlayerConfigEntity build() {
       PlayerConfigEntity playerConfigEntity = new PlayerConfigEntity();
       playerConfigEntity.setId(id);
-      playerConfigEntity.setStats(stats);
+      playerConfigEntity.setPlayer(player);
       playerConfigEntity.setVersion(version);
       playerConfigEntity.setScriptAddress(scriptAddress);
       playerConfigEntity.setUserName(userName);

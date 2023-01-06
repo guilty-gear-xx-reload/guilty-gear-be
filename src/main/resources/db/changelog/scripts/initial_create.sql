@@ -6,8 +6,10 @@ CREATE TABLE users (
 );
 
 CREATE TABLE player (
-	id int8 NOT NULL,
+	id varchar(255) NOT NULL,
 	nickname varchar(255) NULL,
+	player_config_id varchar(255) NULL,
+	player_stats_id varchar(255) NULL,
 	user_id int8 NULL,
 	CONSTRAINT player_pkey PRIMARY KEY (id)
 );
@@ -83,31 +85,29 @@ CREATE TABLE player_config (
 	wait int4 NULL,
 	watch_max_nodes_enable bool NOT NULL,
 	watch_replay_enable bool NOT NULL,
-	player_stats_id varchar(255) NULL,
 	CONSTRAINT player_config_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE player_palette (
 	id int8 NOT NULL,
 	palette_id int8 NULL,
-	player_id int8 NULL,
+	player_id varchar(255) NULL,
 	CONSTRAINT player_palette_pkey PRIMARY KEY (id)
 );
 
 -- player_config foreign keys
 
-ALTER TABLE player_config ADD CONSTRAINT fk1qg871j1mwohos3e700kl5v0r FOREIGN KEY (player_stats_id) REFERENCES player_stats(id);
 ALTER TABLE palette ADD CONSTRAINT fklj9f1menrgsqj74apm81lnaqo FOREIGN KEY (character_id) REFERENCES character(id);
 ALTER TABLE palette_colors ADD CONSTRAINT fkscdxgurju99vtm2pkofyo3xmf FOREIGN KEY (palette_id) REFERENCES palette(id);
 ALTER TABLE sprite ADD CONSTRAINT fkkt69h3w74ipobujs4p17t9qo1 FOREIGN KEY (character_id) REFERENCES character(id);
 ALTER TABLE player ADD CONSTRAINT fkoycxb69gpaapuv23fn52y0g50 FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE player ADD CONSTRAINT fkhbx7w2236doh61gpqvmrikh5p FOREIGN KEY (player_stats_id) REFERENCES player_stats(id);
+ALTER TABLE player ADD CONSTRAINT fkoavs9s88d5v8arfuwopbrsguo FOREIGN KEY (player_config_id) REFERENCES player_config(id);
 ALTER TABLE player_palette ADD CONSTRAINT fk7y022l0c67vtd3ny0bhxiggfb FOREIGN KEY (player_id) REFERENCES player(id);
 ALTER TABLE player_palette ADD CONSTRAINT fknvwso9davqwy1gvo3mb0t798d FOREIGN KEY (palette_id) REFERENCES palette(id);
-
 
 create sequence if not exists sprite_seq;
 create sequence if not exists palette_seq;
 create sequence if not exists character_seq;
 create sequence if not exists users_seq;
-create sequence if not exists player_seq;
 create sequence if not exists player_palette_seq;
