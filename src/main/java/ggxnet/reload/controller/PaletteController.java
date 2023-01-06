@@ -1,12 +1,12 @@
 package ggxnet.reload.controller;
 
 import ggxnet.reload.service.PaletteService;
+import ggxnet.reload.service.dto.CommandPaletteColorsDto;
 import ggxnet.reload.service.dto.PaletteColorsDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/palettes")
@@ -20,4 +20,10 @@ public class PaletteController {
         return paletteService.getPalette(characterName);
     }
 
+    @PostMapping("/{characterName}")
+    public void savePalette(@PathVariable("characterName") String characterName,
+                            @RequestBody CommandPaletteColorsDto commandPaletteColorsDto,
+                            Principal principal) {
+        paletteService.savePalette(commandPaletteColorsDto, characterName, principal.getName());
+    }
 }

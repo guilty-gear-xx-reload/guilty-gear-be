@@ -25,4 +25,28 @@ public class PlayerPaletteEntity {
     @ManyToOne
     @JoinColumn(name = "palette_id")
     private PaletteEntity palette;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public PlayerEntity getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
+
+    public PaletteEntity getPalette() {
+        return palette;
+    }
+
+    public void setPalette(PaletteEntity palette) {
+        this.palette = palette;
+    }
 }

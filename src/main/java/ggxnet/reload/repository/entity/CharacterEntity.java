@@ -21,8 +21,9 @@ public class CharacterEntity {
   @OneToMany(mappedBy = "character")
   private List<SpriteEntity> sprites;
 
-  @OneToOne(mappedBy = "character")
-  private PaletteEntity palette;
+  @OneToMany(mappedBy = "character")
+  private List<PaletteEntity> palettes;
+
 
   public CharacterEntity() {
   }
@@ -51,11 +52,11 @@ public class CharacterEntity {
     this.sprites = sprites;
   }
 
-  public PaletteEntity getPalette() {
-    return palette;
+  public List<PaletteEntity> getPalettes() {
+    return palettes;
   }
 
-  public void setPalette(PaletteEntity palette) {
-    this.palette = palette;
+  public void setPalettes(List<PaletteEntity> palettes) {
+    this.palettes = palettes;
   }
 }

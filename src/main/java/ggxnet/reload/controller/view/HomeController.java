@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 
 import static ggxnet.reload.service.PaletteConverter.readData;
@@ -67,8 +68,8 @@ public class HomeController {
             paletteEntity.setPaletteType(PaletteType.DEFAULT);
             paletteEntity.setCharacter(characterEntity);
             paletteRepository.save(paletteEntity);
-            savedCharacterEntity.setPalette(paletteEntity);
-            characterEntity.setPalette(paletteEntity);
+            savedCharacterEntity.setPalettes(Collections.singletonList(paletteEntity));
+            characterEntity.setPalettes(Collections.singletonList(paletteEntity));
 
             List<SpriteEntity> spriteEntities = new ArrayList<>();
             String path = "C:\\Users\\Alfu\\IdeaProjects\\ggxxreload-matrix\\scrap\\" + characterName;

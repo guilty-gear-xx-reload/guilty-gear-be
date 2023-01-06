@@ -24,40 +24,28 @@ function clickPaletteAndGetRgbColor() {
         var r = pixelData[0];
         var g = pixelData[1];
         var b = pixelData[2];
-        newR = r;
-        newG = g;
-        newB = b;
+
         console.log("r=" + r + ", g=" + g + ", b=" + b);
-//        context.fillStyle = "blue";
-//        context.fillRect(
-//           delta * Math.trunc(eventLocation.x / paletteScale),
-//           delta * Math.trunc(eventLocation.y / paletteScale),
-//           delta,
-//           delta
-//        );
         document.getElementById("selectedPaletteIndex").innerHTML = calculateClickedPaletteIndex(eventLocation.x, eventLocation.y);
         console.log('x: ' + eventLocation.x, ' - y: ' + eventLocation.y);
-        //document.getElementById('spriteSelectedPartColor').style.display= 'block';
         document.getElementById('spriteSelectedPartColor').click();
-        onChangePaletteColor(81, 255, 0);
+
     });
 
 }
 
-function onChangePaletteColor(that) {
-    var rgb = hexToRgb(that.value)
-    var spriteSelectedPartColor = document.getElementById('spriteSelectedPartColor');
+function onInputPaletteColor(that) {
+    var colorPickerRgba = hexToRgb(that.value)
     var selectedPaletteIndex = parseInt(document.getElementById('selectedPaletteIndex').innerHTML);
-    actualPaletteRgba = actualPalette.rgba[selectedPaletteIndex];
-    actualPaletteRgba.r = rgb.r;
-    actualPaletteRgba.g = rgb.g;
-    actualPaletteRgba.b = rgb.b;
+    actualPalette.rgba[selectedPaletteIndex].r = colorPickerRgba.r;
+    actualPalette.rgba[selectedPaletteIndex].g = colorPickerRgba.g;
+    actualPalette.rgba[selectedPaletteIndex].b = colorPickerRgba.b;
     drawSprite(actualSprite, actualPalette);
 
     var canvas = document.querySelector('#palette-canvas');
     var context = canvas.getContext('2d');
 
-    context.fillStyle = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+    context.fillStyle = 'rgb(' + colorPickerRgba.r + ',' + colorPickerRgba.g + ',' + colorPickerRgba.b + ')';
     coordsByIndex = calculateCoordsByPaletteIndex(selectedPaletteIndex);
     context.fillRect(
        delta * coordsByIndex.x,
@@ -65,6 +53,12 @@ function onChangePaletteColor(that) {
        delta,
        delta
     );
+}
+
+function onClickPaletteColor(that) {
+    var selectedPaletteIndex = parseInt(document.getElementById('selectedPaletteIndex').innerHTML);
+    var clickedPaletteRgba = actualPalette.rgba[selectedPaletteIndex];
+    that.value = rgbToHex(clickedPaletteRgba.r, clickedPaletteRgba.g, clickedPaletteRgba.b)
 }
 
 function calculateClickedPaletteIndex(x, y) {

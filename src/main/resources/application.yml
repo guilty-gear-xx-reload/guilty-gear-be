@@ -27,7 +27,7 @@ schedule:
     delay: 180
     frequency: 30
   ping-players:
-    frequency: 2
+    frequency: 200
     timeout: 5000
 
 
