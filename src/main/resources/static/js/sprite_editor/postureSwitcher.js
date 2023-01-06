@@ -11,7 +11,7 @@ function loadPosture(){
             serverDomain + '/palettes/' + character, // display default character
             'application/json')
         .then(responsePalette => {
-            actualPalette = JSON.parse(responsePalette);
+
             drawPalette(actualPalette);
             sendHttpRequest('GET',
                     serverDomain + '/sprites/' + character + '?postureId=' + posture, // display default sprite with default posture

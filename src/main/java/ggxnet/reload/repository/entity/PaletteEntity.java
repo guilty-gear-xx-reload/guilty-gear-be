@@ -18,6 +18,7 @@ public class PaletteEntity {
       allocationSize = 1
   )
   private long id;
+  private String name;
 
   @Lob
   private String header;
@@ -25,12 +26,12 @@ public class PaletteEntity {
   @ElementCollection
   @CollectionTable(name = "palette_colors", joinColumns = @JoinColumn(name = "palette_id"))
   private List<RGBa> colors;
-  private long fileSizeInBytes;
 
+  private long fileSizeInBytes;
   @Enumerated(EnumType.STRING)
   private PaletteType paletteType;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "character_id")
   private CharacterEntity character;
 
@@ -84,5 +85,13 @@ public class PaletteEntity {
 
   public void setCharacter(CharacterEntity character) {
     this.character = character;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

@@ -29,6 +29,7 @@ CREATE TABLE palette (
 	id int8 NOT NULL,
 	file_size_in_bytes int8 NOT NULL,
 	"header" oid NULL,
+	name varchar(255) NULL,
 	palette_type varchar(255) NULL,
 	character_id int8 NULL,
 	CONSTRAINT palette_pkey PRIMARY KEY (id)

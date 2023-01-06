@@ -8,6 +8,7 @@
 <script type="text/javascript" th:src="@{/js/sprite_editor/spriteDrawer.js}"></script>
 <script type="text/javascript" th:src="@{/js/sprite_editor/paletteDrawer.js}"></script>
 <script type="text/javascript" th:src="@{/js/sprite_editor/colorListeners.js}"></script>
+<script type="text/javascript" th:src="@{/js/sprite_editor/savePalette.js}"></script>
 
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="content">
@@ -16,7 +17,10 @@
     <canvas id="palette-canvas" onmouseup="selectSpritePartColor()"></canvas>
     <canvas id="sprite-canvas"></canvas>
     <p>Palette index: <span id="selectedPaletteIndex">0</span></p>
-    <input type="color" id="spriteSelectedPartColor" style="display:none" oninput="onChangePaletteColor(this)">
+    <input type="color" id="spriteSelectedPartColor" style="display:none" oninput="onInputPaletteColor(this)" onclick="onClickPaletteColor(this)">
+
+    <button type="submit" class="btn" onclick="onClickSavePalette()">Save</button>
+    <input type="text" id="paletteName">
 </div>
 </body>
 
