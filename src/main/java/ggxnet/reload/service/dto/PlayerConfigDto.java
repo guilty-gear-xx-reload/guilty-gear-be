@@ -38,8 +38,7 @@ public record PlayerConfigDto(
     int totalError
 ) implements Serializable {
 
-  public static PlayerConfigDto of(PlayerConfigEntity playerConfigEntity) {
-    PlayerStatsEntity playerStats = playerConfigEntity.getStats();
+  public static PlayerConfigDto of(PlayerConfigEntity playerConfigEntity,PlayerStatsEntity playerStats) {
     return new PlayerConfigDto(playerConfigEntity.getVersion(), playerConfigEntity.getScriptAddress(), playerConfigEntity.getUserName(),
         playerConfigEntity.getTrip(), playerConfigEntity.getPort(), playerConfigEntity.getDelay(), playerConfigEntity.getWait(),
         playerConfigEntity.getDispInvCombo(),

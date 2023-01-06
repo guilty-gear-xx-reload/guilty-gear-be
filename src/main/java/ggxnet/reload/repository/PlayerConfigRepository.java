@@ -11,5 +11,5 @@ public interface PlayerConfigRepository extends CrudRepository<PlayerConfigEntit
 
   List<PlayerConfigEntity> findAllByActive(boolean active);
 
-  Optional<PlayerConfigEntity> findById(String playerId);
+  Optional<PlayerConfigEntity> findByPlayerId(String playerId);
 }

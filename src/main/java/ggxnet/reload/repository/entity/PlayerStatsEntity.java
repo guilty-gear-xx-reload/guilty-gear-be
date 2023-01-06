@@ -20,7 +20,7 @@ public class PlayerStatsEntity {
   private int totalDraw;
   private int totalError;
   @OneToOne(mappedBy = "stats")
-  private PlayerConfigEntity playerConfig;
+  private PlayerEntity player;
 
   public PlayerStatsEntity() {
   }
@@ -128,12 +128,12 @@ public class PlayerStatsEntity {
     this.totalError = totalError;
   }
 
-  public PlayerConfigEntity getPlayerConfig() {
-    return playerConfig;
+  public PlayerEntity getPlayer() {
+    return player;
   }
 
-  public void setPlayerConfig(PlayerConfigEntity playerConfig) {
-    this.playerConfig = playerConfig;
+  public void setPlayer(PlayerEntity player) {
+    this.player = player;
   }
 
   public static final class PlayerStatsEntityBuilder {
@@ -146,7 +146,7 @@ public class PlayerStatsEntity {
     private int totalLose;
     private int totalDraw;
     private int totalError;
-    private PlayerConfigEntity playerConfig;
+    private PlayerEntity player;
 
     private PlayerStatsEntityBuilder() {
     }
@@ -200,8 +200,8 @@ public class PlayerStatsEntity {
       return this;
     }
 
-    public PlayerStatsEntityBuilder playerConfig(PlayerConfigEntity playerConfig) {
-      this.playerConfig = playerConfig;
+    public PlayerStatsEntityBuilder player(PlayerEntity player) {
+      this.player = player;
       return this;
     }
 
@@ -216,7 +216,7 @@ public class PlayerStatsEntity {
       playerStatsEntity.setTotalLose(totalLose);
       playerStatsEntity.setTotalDraw(totalDraw);
       playerStatsEntity.setTotalError(totalError);
-      playerStatsEntity.setPlayerConfig(playerConfig);
+      playerStatsEntity.setPlayer(player);
       return playerStatsEntity;
     }
   }
