@@ -5,6 +5,7 @@ import ggxnet.reload.repository.PaletteRepository;
 import ggxnet.reload.repository.SpriteRepository;
 import ggxnet.reload.repository.entity.CharacterEntity;
 import ggxnet.reload.repository.entity.PaletteEntity;
+import ggxnet.reload.repository.entity.PaletteType;
 import ggxnet.reload.repository.entity.SpriteEntity;
 import ggxnet.reload.service.dto.PaletteRGBa;
 import lombok.RequiredArgsConstructor;
@@ -63,6 +64,7 @@ public class HomeController {
             paletteEntity.setHeader(byteHeader);
             paletteEntity.setColors(paletteRGBa.rgba());
             paletteEntity.setFileSizeInBytes(paletteFile.length());
+            paletteEntity.setPaletteType(PaletteType.DEFAULT);
             paletteEntity.setCharacter(characterEntity);
             paletteRepository.save(paletteEntity);
             savedCharacterEntity.setPalette(paletteEntity);

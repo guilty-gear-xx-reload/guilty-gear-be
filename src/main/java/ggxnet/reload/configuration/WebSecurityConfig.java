@@ -41,25 +41,31 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/home", "/error", "/registration")
         .permitAll()
         .antMatchers(
+            HttpMethod.GET,
+            "/characters",
+            "/palettes",
+            "/sprites"
+            ).permitAll()
+        .antMatchers(
             HttpMethod.POST,
             "/",
-            "/register",
-            "/enter",
-            "/leave",
-            "/read",
-            "/get-config",
-            "/set-config",
-            "/win",
-            "/draw",
-            "/lose")
+            "/rest/register",
+            "/rest/enter",
+            "/rest/leave",
+            "/rest/read",
+            "/rest/get-config",
+            "/rest/set-config",
+            "/rest/win",
+            "/rest/draw",
+            "/rest/lose")
         .permitAll()
-        /*                .anyRequest().authenticated()
+        .anyRequest().authenticated()
         .and()
         .sessionManagement().disable()
         .formLogin()
         .loginPage("/login")
         .defaultSuccessUrl("/", true)
-        .permitAll()*/
+        .permitAll()
         .and()
         .logout()
         .permitAll();

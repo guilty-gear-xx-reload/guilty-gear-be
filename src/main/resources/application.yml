@@ -16,8 +16,8 @@ spring:
       auto-commit: false
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: none
+#    hibernate:
+#      ddl-auto: none
 logging:
   level:
     web: INFO
