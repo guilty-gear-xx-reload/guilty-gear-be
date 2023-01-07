@@ -1,3 +1,7 @@
+### Actual database ERD
+![image](https://user-images.githubusercontent.com/52701021/211127900-eb0ffc5b-9d2c-4b35-8fcd-b77da65e4c11.png)
+
+
 ### Requirements
 
 - MonggoDB
