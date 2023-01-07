@@ -30,7 +30,12 @@ function initCharacters() {
             var characters = JSON.parse(responseCharacters);
             var selectElement = document.getElementById('character');
             for (var i = 0; i < characters.length; i++) {
-              selectElement.add(new Option(characters[i]));
+              var characterName = characters[i];
+              var option = new Option(characterName);
+              if(characterName == 'Sol') { // choose default character on drop-down html tag
+                option.selected = true;
+              }
+              selectElement.add(option);
             }
     })
 }
@@ -51,7 +56,7 @@ function loadDefaultCharacterWithDefaultPosture(){
     var defaultCharacter = 'Sol';
     var defaultPosture = 0;
     sendHttpRequest('GET',
-            serverDomain + '/palettes/' + defaultCharacter, // display default character
+            serverDomain + '/palettes/default/' + defaultCharacter, // display default character
             'application/json')
         .then(responsePalette => {
             actualPalette = JSON.parse(responsePalette);

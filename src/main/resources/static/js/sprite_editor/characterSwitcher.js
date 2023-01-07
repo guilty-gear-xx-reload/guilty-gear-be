@@ -5,6 +5,7 @@ function bindCharacterChangeListener(){
 }
 
 function loadCharacter(){
+    getPlayerPalettesForCharacter();
     var character = this.value;
     sendHttpRequest('GET',
             serverDomain + '/characters/postures/' + character + '/total-elements',
@@ -29,7 +30,7 @@ function loadDefaultPosture(){
     var character = document.getElementById('character').value;
     var defaultPosture = 0;
     sendHttpRequest('GET',
-            serverDomain + '/palettes/' + character, // display default character
+            serverDomain + '/palettes/default/' + character, // display default character
             'application/json')
         .then(responsePalette => {
             actualPalette = JSON.parse(responsePalette);
