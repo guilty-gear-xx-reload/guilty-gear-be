@@ -11,13 +11,14 @@ import ggxnet.reload.service.dto.CommandPaletteColorsDto;
 import ggxnet.reload.service.dto.PaletteColorsDto;
 import ggxnet.reload.service.dto.RGBa;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +56,22 @@ public class PaletteService {
         playerPaletteEntity.setPalette(persistedPalette);
         playerPaletteEntity.setPlayer(player);
         playerPaletteRepository.save(playerPaletteEntity);
+    }
+
+    public Map<Long, String> getPlayerPaletteNames(String characterName, String username) {
+        var player = playerRepository.findByUserUsername(username).orElseThrow();
+        var palettes = playerPaletteRepository.findAllByPlayerAndPaletteCharacterName(player, characterName).stream()
+                .map(PlayerPaletteEntity::getPalette)
+                .toList();
+        Map<Long, String> paletteNames = new HashMap<>();
+        palettes.forEach(playerPalette -> {
+            paletteNames.put(playerPalette.getId(), playerPalette.getName());
+        });
+        return paletteNames;
+    }
+
+    public PaletteColorsDto getPaletteById(Long paletteId) {
+        PaletteEntity palette = paletteRepository.findById(paletteId).orElseThrow();
+        return new PaletteColorsDto(palette.getColors());
     }
 }

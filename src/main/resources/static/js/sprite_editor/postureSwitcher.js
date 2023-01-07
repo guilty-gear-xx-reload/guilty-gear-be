@@ -8,13 +8,12 @@ function loadPosture(){
     var character = document.getElementById('character').value;
     var posture = this.value;
     sendHttpRequest('GET',
-            serverDomain + '/palettes/' + character, // display default character
+            serverDomain + '/palettes/default/' + character,
             'application/json')
         .then(responsePalette => {
-
             drawPalette(actualPalette);
             sendHttpRequest('GET',
-                    serverDomain + '/sprites/' + character + '?postureId=' + posture, // display default sprite with default posture
+                    serverDomain + '/sprites/' + character + '?postureId=' + posture,
                     'application/json')
                 .then(responseSprite => {
                     actualSprite = JSON.parse(responseSprite);
@@ -22,3 +21,4 @@ function loadPosture(){
                 })
         })
 }
+

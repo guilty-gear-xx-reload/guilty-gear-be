@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/palettes")
@@ -15,12 +16,23 @@ public class PaletteController {
 
     private final PaletteService paletteService;
 
-    @GetMapping("/{characterName}")
+    @GetMapping("/default/{characterName}")
     public PaletteColorsDto getPalette(@PathVariable("characterName") String characterName) {
         return paletteService.getPalette(characterName);
     }
 
-    @PostMapping("/{characterName}")
+    @GetMapping("/custom/characters/{characterName}")
+    public Map<Long, String> getPlayerPaletteNames(@PathVariable("characterName") String characterName,
+                                                   Principal principal) {
+        return paletteService.getPlayerPaletteNames(characterName, principal.getName());
+    }
+
+    @GetMapping("/custom/{paletteId}")
+    public PaletteColorsDto getPaletteById(@PathVariable("paletteId") Long paletteId) {
+        return paletteService.getPaletteById(paletteId);
+    }
+
+    @PostMapping("/custom/{characterName}")
     public void savePalette(@PathVariable("characterName") String characterName,
                             @RequestBody CommandPaletteColorsDto commandPaletteColorsDto,
                             Principal principal) {
