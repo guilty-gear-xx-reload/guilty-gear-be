@@ -13,7 +13,7 @@ class SpriteController {
   private final SpriteService spriteService;
 
   @GetMapping("/{characterName}")
-  public SpriteColorIndexesDto getPalette(
+  public SpriteColorIndexesDto getSprite(
       @PathVariable("characterName") String characterName,
       @RequestParam("postureId") int postureId) {
     return spriteService.getSprite(characterName, postureId);

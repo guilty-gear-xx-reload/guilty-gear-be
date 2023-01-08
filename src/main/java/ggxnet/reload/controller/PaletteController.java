@@ -3,7 +3,9 @@ package ggxnet.reload.controller;
 import ggxnet.reload.player.palette.PaletteService;
 import ggxnet.reload.player.palette.dto.CommandPaletteColorsDto;
 import ggxnet.reload.player.palette.dto.PaletteColorsDto;
+import ggxnet.reload.player.palette.dto.PaletteColorsWithNameDto;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +33,26 @@ class PaletteController {
     return paletteService.getPaletteById(paletteId);
   }
 
-  @PostMapping("/custom/{characterName}")
-  public void savePalette(
-      @PathVariable("characterName") String characterName,
-      @RequestBody CommandPaletteColorsDto commandPaletteColorsDto,
-      Principal principal) {
-    paletteService.savePalette(commandPaletteColorsDto, characterName, principal.getName());
+  @GetMapping("/customm/{characterName}")
+  public List<PaletteColorsWithNameDto> getCustomPalettes(
+      @PathVariable("characterName") String characterName, Principal principal) {
+    return paletteService.getCustomPalettes(characterName, principal.getName());
+  }
+
+  @PostMapping("/custom")
+  public Long savePalette(
+      @RequestBody CommandPaletteColorsDto commandPaletteColorsDto, Principal principal) {
+    return paletteService.savePalette(commandPaletteColorsDto, principal.getName());
+  }
+
+  @PutMapping("/custom/{id}")
+  public void updatePalette(
+      @PathVariable("id") Long id, @RequestBody CommandPaletteColorsDto commandPaletteColorsDto) {
+    paletteService.updatePalette(id, commandPaletteColorsDto);
+  }
+
+  @DeleteMapping("/custom/{id}")
+  public void deletePalette(@PathVariable("id") Long id) {
+    paletteService.deletePalette(id);
   }
 }

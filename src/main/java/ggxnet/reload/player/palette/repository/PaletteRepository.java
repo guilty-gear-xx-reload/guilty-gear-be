@@ -18,6 +18,8 @@ public interface PaletteRepository extends CrudRepository<PaletteEntity, Long> {
 
   List<PaletteEntity> findByPaletteType(PaletteType paletteType);
 
+  long countByPaletteType(PaletteType paletteType);
+
   @Query(
       "Select palette from PaletteEntity palette join CharacterEntity character on palette.character = character.id where character.id not in (?1) and palette.paletteType = 'DEFAULT'")
   List<PaletteEntity> findDefaultPalettesIfCustomNotExist(List<Long> characterIds);
