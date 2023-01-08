@@ -40,7 +40,7 @@ public class HomeController {
 
     @GetMapping("/import")
     public void importAll() throws IOException {
-        String palettePath = "C:\\Users\\Alfu\\IdeaProjects\\SwingSprite\\output\\palettes";
+        String palettePath = "C:\\Users\\Alfu\\IdeaProjects\\guilty-gear-xx-reload\\server-spring\\default_palettes";
         File paletteFolder = new File(palettePath);
         File[] listOfFilesPalette = paletteFolder.listFiles();
         for (File paletteFile : listOfFilesPalette) {
