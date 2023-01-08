@@ -10,6 +10,8 @@
 -->
 <script type="text/javascript" th:src="@{/js/pinger.js}"></script>
 -->
+<script type="text/javascript" th:src="@{/js/initCommons.js}"></script>
+<script type="text/javascript" th:src="@{/js/startBattle.js}"></script>
 <script type="text/javascript" th:src="@{/js/lobbyAudio.js}"></script>
 
 <div th:replace="fragments/navbar :: navbar"></div>
@@ -26,21 +28,25 @@
             <th scope="col">draws</th>
             <th scope="col">total</th>
             <th scope="col">w/l</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="playerData : ${playersLobbyData}">
-            <td id="playerId" th:text="${playerData.id}" style="display:none;"></td>
-            <td th:text="${playerData.nickname}"></td>
-            <td><input th:name="${playerData.status}" type="button" class="availabilityButton"></td>
-            <td id="ping" th:text="${playerData.ping}"></td>
-            <td th:text="${playerData.totalWins}"></td>
-            <td th:text="${playerData.totalLoses}"></td>
-            <td th:text="${playerData.totalDraws}"></td>
-            <td th:text="${playerData.totalGames}"></td>
-            <td th:text="${playerData.winToLoses}"></td>
-        </tr>
+            <tr th:each="playerData : ${playersLobbyData}">
+                <td id="playerId" th:text="${playerData.id}" style="display:none;"></td>
+                <td th:text="${playerData.nickname}"></td>
+                <td><input th:name="${playerData.status}" type="button" class="availabilityButton"></td>
+                <td id="ping" th:text="${playerData.ping}"></td>
+                <td th:text="${playerData.totalWins}"></td>
+                <td th:text="${playerData.totalLoses}"></td>
+                <td th:text="${playerData.totalDraws}"></td>
+                <td th:text="${playerData.totalGames}"></td>
+                <td th:text="${playerData.winToLoses}"></td>
+                <td><button type="submit" class="btn" onclick="onClickStartBattle()">Play</button></td>
+            </tr>
         </tbody>
+
+        <br><input type="text" id="gameLocationPath" placeholder="Put location of your ggxx here...">
 
         <audio id="lobbyAudio" autoplay loop>
             <source src="justice.mp3" type="audio/mpeg">
