@@ -40,12 +40,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/home", "/error", "/registration")
         .permitAll()
-        .antMatchers(
-            HttpMethod.GET,
-            "/characters",
-            "/palettes",
-            "/sprites"
-            ).permitAll()
+        .antMatchers(HttpMethod.GET, "/characters", "/palettes", "/sprites")
+        .permitAll()
         .antMatchers(
             HttpMethod.POST,
             "/",
@@ -57,11 +53,14 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/rest/set-config",
             "/rest/win",
             "/rest/draw",
+            "/rest/palettes",
             "/rest/lose")
         .permitAll()
-        .anyRequest().authenticated()
+        .anyRequest()
+        .authenticated()
         .and()
-        .sessionManagement().disable()
+        .sessionManagement()
+        .disable()
         .formLogin()
         .loginPage("/login")
         .defaultSuccessUrl("/", true)

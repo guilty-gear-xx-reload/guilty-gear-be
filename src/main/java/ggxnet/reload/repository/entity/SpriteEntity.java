@@ -6,26 +6,18 @@ import javax.persistence.*;
 @Table(name = "sprite")
 public class SpriteEntity {
   @Id
-  @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "sprite_seq"
-  )
-  @SequenceGenerator(
-      name = "sprite_seq",
-      allocationSize = 1
-  )
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sprite_seq")
+  @SequenceGenerator(name = "sprite_seq", allocationSize = 1)
   private long id;
 
   private int postureId;
   private int width;
   private int height;
 
-  @Lob
-  private String colorIndexes;
+  @Lob private String colorIndexes;
   private long fileSizeInBytes;
 
-  public SpriteEntity() {
-  }
+  public SpriteEntity() {}
 
   @ManyToOne
   @JoinColumn(name = "character_id")

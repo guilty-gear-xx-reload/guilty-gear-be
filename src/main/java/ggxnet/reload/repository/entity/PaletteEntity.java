@@ -1,33 +1,27 @@
 package ggxnet.reload.repository.entity;
 
 import ggxnet.reload.service.dto.RGBa;
-
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "palette")
 public class PaletteEntity {
   @Id
-  @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "palette_seq"
-  )
-  @SequenceGenerator(
-      name = "palette_seq",
-      allocationSize = 1
-  )
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "palette_seq")
+  @SequenceGenerator(name = "palette_seq", allocationSize = 1)
   private long id;
+
   private String name;
 
-  @Lob
-  private String header;
+  @Lob private String header;
 
   @ElementCollection
   @CollectionTable(name = "palette_colors", joinColumns = @JoinColumn(name = "palette_id"))
   private List<RGBa> colors;
 
   private long fileSizeInBytes;
+
   @Enumerated(EnumType.STRING)
   private PaletteType paletteType;
 
@@ -35,9 +29,7 @@ public class PaletteEntity {
   @JoinColumn(name = "character_id")
   private CharacterEntity character;
 
-
-  public PaletteEntity() {
-  }
+  public PaletteEntity() {}
 
   public long getId() {
     return id;

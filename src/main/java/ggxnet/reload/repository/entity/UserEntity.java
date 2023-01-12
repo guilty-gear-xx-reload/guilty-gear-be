@@ -6,23 +6,17 @@ import javax.persistence.*;
 @Table(name = "users")
 public class UserEntity {
   @Id
-  @GeneratedValue(
-          strategy = GenerationType.SEQUENCE,
-          generator = "users_seq"
-  )
-  @SequenceGenerator(
-          name = "users_seq",
-          allocationSize = 1
-  )
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+  @SequenceGenerator(name = "users_seq", allocationSize = 1)
   private long id;
+
   private String username;
   private String password;
 
   @OneToOne(mappedBy = "user")
   private PlayerEntity playerEntity;
 
-  public UserEntity() {
-  }
+  public UserEntity() {}
 
   public long getId() {
     return id;
