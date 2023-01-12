@@ -1,5 +1,5 @@
 //TODO nie wiem co z tym zrobić - skąd my mamy to brać? O_o otrząśnij sie
-const serverDomain = 'http://26.39.40.108/ggxxreload'
+const serverDomain = 'http://localhost/ggxxreload'
 
 const sendHttpRequest = (method, url, contentType, body) => {
     return fetch(url, {

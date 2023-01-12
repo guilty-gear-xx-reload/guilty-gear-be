@@ -1,0 +1,1 @@
+ALTER TABLE player_palette ADD active bool NOT NULL;

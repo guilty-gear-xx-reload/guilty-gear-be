@@ -23,3 +23,15 @@ databaseChangeLog:
                   relativeToChangelogFile: true
                   splitStatements: true
                   stripComments: true
+  - changeSet:
+      id: 0000002
+      author: arekg
+      comment: alter table player_palette
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: scripts/change_set_000.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

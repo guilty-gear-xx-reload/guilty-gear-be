@@ -18,6 +18,8 @@ public class PlayerPaletteEntity {
   @JoinColumn(name = "palette_id")
   private PaletteEntity palette;
 
+  private boolean active;
+
   public long getId() {
     return id;
   }
@@ -40,5 +42,13 @@ public class PlayerPaletteEntity {
 
   public void setPalette(PaletteEntity palette) {
     this.palette = palette;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 }
