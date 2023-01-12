@@ -1,6 +1,7 @@
 package ggxnet.reload.controller.view;
 
-import ggxnet.reload.service.PaletteConverter;
+import ggxnet.reload.player.palette.PaletteConverter;
+import ggxnet.reload.utils.PageTitle;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,11 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class HomeController {
+class HomeController {
   private final PaletteConverter paletteConverter;
 
   @GetMapping
-  public String getStartPage(Model model) throws Exception {
+  public String getStartPage(Model model) {
     model.addAttribute("title", PageTitle.DEFAULT);
     return "index";
   }

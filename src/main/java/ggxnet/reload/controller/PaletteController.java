@@ -1,8 +1,8 @@
 package ggxnet.reload.controller;
 
-import ggxnet.reload.service.PaletteService;
-import ggxnet.reload.service.dto.CommandPaletteColorsDto;
-import ggxnet.reload.service.dto.PaletteColorsDto;
+import ggxnet.reload.player.palette.PaletteService;
+import ggxnet.reload.player.palette.dto.CommandPaletteColorsDto;
+import ggxnet.reload.player.palette.dto.PaletteColorsDto;
 import java.security.Principal;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/palettes")
 @RequiredArgsConstructor
-public class PaletteController {
+class PaletteController {
 
   private final PaletteService paletteService;
 

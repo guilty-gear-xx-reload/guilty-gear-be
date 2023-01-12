@@ -1,14 +1,14 @@
 package ggxnet.reload.controller;
 
-import ggxnet.reload.service.SpriteService;
-import ggxnet.reload.service.dto.SpriteColorIndexesDto;
+import ggxnet.reload.player.palette.SpriteService;
+import ggxnet.reload.player.palette.dto.SpriteColorIndexesDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sprites")
 @RequiredArgsConstructor
-public class SpriteController {
+class SpriteController {
 
   private final SpriteService spriteService;
 

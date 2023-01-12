@@ -1,6 +1,7 @@
 package ggxnet.reload.controller.view;
 
-import ggxnet.reload.service.LobbyService;
+import ggxnet.reload.lobby.LobbyService;
+import ggxnet.reload.utils.PageTitle;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(path = "/lobby")
-public class LobbyController {
+class LobbyController {
 
   private final LobbyService lobbyService;
 

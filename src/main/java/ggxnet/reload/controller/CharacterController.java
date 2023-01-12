@@ -1,6 +1,6 @@
 package ggxnet.reload.controller;
 
-import ggxnet.reload.service.CharacterService;
+import ggxnet.reload.player.palette.CharacterService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/characters")
 @RequiredArgsConstructor
-public class CharacterController {
+class CharacterController {
 
   private final CharacterService characterService;
 
