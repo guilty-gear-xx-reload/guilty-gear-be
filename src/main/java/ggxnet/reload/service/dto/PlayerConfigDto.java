@@ -2,7 +2,6 @@ package ggxnet.reload.service.dto;
 
 import ggxnet.reload.repository.entity.PlayerConfigEntity;
 import ggxnet.reload.repository.entity.PlayerStatsEntity;
-
 import java.io.Serializable;
 
 public record PlayerConfigDto(
@@ -35,19 +34,41 @@ public record PlayerConfigDto(
     int totalWin,
     int totalLose,
     int totalDraw,
-    int totalError
-) implements Serializable {
+    int totalError)
+    implements Serializable {
 
-  public static PlayerConfigDto of(PlayerConfigEntity playerConfigEntity,PlayerStatsEntity playerStats) {
-    return new PlayerConfigDto(playerConfigEntity.getVersion(), playerConfigEntity.getScriptAddress(), playerConfigEntity.getUserName(),
-        playerConfigEntity.getTrip(), playerConfigEntity.getPort(), playerConfigEntity.getDelay(), playerConfigEntity.getWait(),
+  public static PlayerConfigDto of(
+      PlayerConfigEntity playerConfigEntity, PlayerStatsEntity playerStats) {
+    return new PlayerConfigDto(
+        playerConfigEntity.getVersion(),
+        playerConfigEntity.getScriptAddress(),
+        playerConfigEntity.getUserName(),
+        playerConfigEntity.getTrip(),
+        playerConfigEntity.getPort(),
+        playerConfigEntity.getDelay(),
+        playerConfigEntity.getWait(),
         playerConfigEntity.getDispInvCombo(),
-        playerConfigEntity.getSlowRate(), playerConfigEntity.getRounds(), playerConfigEntity.getMessage(), playerConfigEntity.getLastActivity(),
+        playerConfigEntity.getSlowRate(),
+        playerConfigEntity.getRounds(),
+        playerConfigEntity.getMessage(),
+        playerConfigEntity.getLastActivity(),
         playerConfigEntity.isEnableNet(),
-        playerConfigEntity.isIgnoreMissNode(), playerConfigEntity.isUseEx(), playerConfigEntity.isFpsEnable(), playerConfigEntity.isBroadcastEnable(),
+        playerConfigEntity.isIgnoreMissNode(),
+        playerConfigEntity.isUseEx(),
+        playerConfigEntity.isFpsEnable(),
+        playerConfigEntity.isBroadcastEnable(),
         playerConfigEntity.isIntrusionEnable(),
-        playerConfigEntity.isWatchReplayEnable(), playerConfigEntity.isWatchReplayEnable(), playerConfigEntity.isWatchMaxNodesEnable(),
-        playerConfigEntity.isActive(), playerStats.getWins(), playerStats.getRank(), playerStats.getScore(), playerStats.getTotalBattle(),
-        playerStats.getTotalWin(), playerStats.getTotalLose(), playerStats.getTotalDraw(), playerStats.getTotalError());
+        playerConfigEntity.isWatchReplayEnable(),
+        playerConfigEntity.isWatchReplayEnable(),
+        playerConfigEntity.isWatchMaxNodesEnable(),
+        playerConfigEntity.isActive(),
+        playerStats.getWins(),
+        playerStats.getRank(),
+        playerStats.getScore(),
+        playerStats.getTotalBattle(),
+        playerStats.getTotalWin(),
+        playerStats.getTotalLose(),
+        playerStats.getTotalDraw(),
+        playerStats.getTotalError());
   }
 }

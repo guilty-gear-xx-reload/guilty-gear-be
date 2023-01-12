@@ -1,14 +1,13 @@
 package ggxnet.reload.repository;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import ggxnet.reload.service.PingService;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Slf4j
 @Component
@@ -17,7 +16,10 @@ class PingScheduler {
   private final SimpMessagingTemplate messagingTemplate;
   private final PlayerConfigRepository playerConfigRepository;
 
-  PingScheduler(PingService pingService, SimpMessagingTemplate messagingTemplate, PlayerConfigRepository playerConfigRepository) {
+  PingScheduler(
+      PingService pingService,
+      SimpMessagingTemplate messagingTemplate,
+      PlayerConfigRepository playerConfigRepository) {
     this.pingService = pingService;
     this.messagingTemplate = messagingTemplate;
     this.playerConfigRepository = playerConfigRepository;

@@ -20,9 +20,25 @@ public class PlayerConfigCommand {
   private final boolean watchSaveReplay;
   private final boolean watchMaxNodes;
 
-  public PlayerConfigCommand(String scriptAddress, String userName, String trip, Integer port, Integer delay, boolean ignoreMisNode, boolean ignoreSlow,
-      Integer wait, boolean useEx, Integer dispInvCombo, boolean showfps, Integer slowRate, Integer rounds, String msg, boolean watchBroadcast,
-      boolean watchIntrusion, boolean watchSaveReplay, boolean watchMaxNodes) {
+  public PlayerConfigCommand(
+      String scriptAddress,
+      String userName,
+      String trip,
+      Integer port,
+      Integer delay,
+      boolean ignoreMisNode,
+      boolean ignoreSlow,
+      Integer wait,
+      boolean useEx,
+      Integer dispInvCombo,
+      boolean showfps,
+      Integer slowRate,
+      Integer rounds,
+      String msg,
+      boolean watchBroadcast,
+      boolean watchIntrusion,
+      boolean watchSaveReplay,
+      boolean watchMaxNodes) {
     this.scriptAddress = scriptAddress;
     this.userName = userName;
     this.trip = trip;

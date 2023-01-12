@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SpriteController {
 
-    private final SpriteService spriteService;
+  private final SpriteService spriteService;
 
-    @GetMapping("/{characterName}")
-    public SpriteColorIndexesDto getPalette(@PathVariable("characterName") String characterName, @RequestParam("postureId") int postureId) {
-        return spriteService.getSprite(characterName, postureId);
-    }
-
+  @GetMapping("/{characterName}")
+  public SpriteColorIndexesDto getPalette(
+      @PathVariable("characterName") String characterName,
+      @RequestParam("postureId") int postureId) {
+    return spriteService.getSprite(characterName, postureId);
+  }
 }

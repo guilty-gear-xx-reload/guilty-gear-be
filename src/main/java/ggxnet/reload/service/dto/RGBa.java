@@ -1,27 +1,21 @@
 package ggxnet.reload.service.dto;
 
-import javax.persistence.Embeddable;
 import java.io.Serial;
 import java.io.Serializable;
+import javax.persistence.Embeddable;
 
 @Embeddable
 public class RGBa implements Serializable {
-  @Serial
-  private static final long serialVersionUID = 0L;
+  @Serial private static final long serialVersionUID = 0L;
 
-  public RGBa() {
-  }
+  public RGBa() {}
 
   private short R;
   private short G;
   private short B;
   private short a;
 
-  public RGBa(
-      short R,
-      short G,
-      short B,
-      short a) {
+  public RGBa(short R, short G, short B, short a) {
     this.R = R;
     this.G = G;
     this.B = B;

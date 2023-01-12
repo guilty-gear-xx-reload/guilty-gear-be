@@ -3,8 +3,10 @@ package ggxnet.reload.controller;
 import ggxnet.reload.controller.command.EnterCommand;
 import ggxnet.reload.controller.command.PlayerConfigCommand;
 import ggxnet.reload.controller.command.PlayerIdCommand;
+import ggxnet.reload.service.PaletteService;
 import ggxnet.reload.service.PlayerService;
 import ggxnet.reload.service.dto.PlayerConfigDto;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/rest")
 class LobbyRestController {
   private final PlayerService playerService;
+  private final PaletteService paletteService;
 
-  LobbyRestController(PlayerService playerService) {
+  LobbyRestController(PlayerService playerService, PaletteService paletteService) {
     this.playerService = playerService;
+    this.paletteService = paletteService;
   }
 
   @PostMapping("/set-config")
@@ -61,5 +65,10 @@ class LobbyRestController {
   @PostMapping("/draw")
   public void addDraw(@RequestBody PlayerIdCommand command) {
     playerService.addDraw(command.getPlayerId());
+  }
+
+  @PostMapping("/palettes")
+  public Map<String, byte[]> getBinaryPalettesByPlayerId(@RequestBody PlayerIdCommand command) {
+    return paletteService.getBinaryPalettesByPlayerId(command.getPlayerId());
   }
 }

@@ -1,20 +1,20 @@
 package ggxnet.reload.repository.entity;
 
 import ggxnet.reload.controller.command.PlayerConfigCommand;
-
+import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.time.Instant;
 
 @Entity
 @Table(name = "player_config")
 public class PlayerConfigEntity {
-  @Id
-  private String id;
+  @Id private String id;
+
   @OneToOne(mappedBy = "config")
   private PlayerEntity player;
+
   private int version;
   private String scriptAddress;
   private String userName;
@@ -38,13 +38,12 @@ public class PlayerConfigEntity {
   private boolean watchMaxNodesEnable;
   private boolean active;
 
-  public PlayerConfigEntity() {
-  }
+  public PlayerConfigEntity() {}
 
   public static PlayerConfigEntity of(String id, PlayerConfigCommand command) {
     return PlayerConfigEntityBuilder.builder()
         .id(id)
-     //   .player() todo
+        //   .player() todo
         .version(120)
         .scriptAddress(command.getScriptAddress())
         .userName(command.getUserName())
@@ -84,7 +83,7 @@ public class PlayerConfigEntity {
   private String createParam() {
     return "0"
         . // p_busy
-            concat("06") // lobby version
+        concat("06") // lobby version
         .concat(getBooleanValue(useEx))
         .concat("00000")
         .concat("F")
@@ -323,8 +322,7 @@ public class PlayerConfigEntity {
     private boolean watchMaxNodesEnable;
     private boolean active;
 
-    private PlayerConfigEntityBuilder() {
-    }
+    private PlayerConfigEntityBuilder() {}
 
     public static PlayerConfigEntityBuilder builder() {
       return new PlayerConfigEntityBuilder();

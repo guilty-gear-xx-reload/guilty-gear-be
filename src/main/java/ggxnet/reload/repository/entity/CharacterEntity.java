@@ -1,32 +1,25 @@
 package ggxnet.reload.repository.entity;
 
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "character")
 public class CharacterEntity {
   @Id
-  @GeneratedValue(
-      strategy = GenerationType.SEQUENCE,
-      generator = "character_seq"
-  )
-  @SequenceGenerator(
-      name = "character_seq",
-      allocationSize = 1
-  )
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "character_seq")
+  @SequenceGenerator(name = "character_seq", allocationSize = 1)
   private long id;
 
   private String name;
+
   @OneToMany(mappedBy = "character")
   private List<SpriteEntity> sprites;
 
   @OneToMany(mappedBy = "character")
   private List<PaletteEntity> palettes;
 
-
-  public CharacterEntity() {
-  }
+  public CharacterEntity() {}
 
   public long getId() {
     return id;

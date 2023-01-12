@@ -1,16 +1,15 @@
 package ggxnet.reload.repository.entity;
 
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.UUID;
 
 @Entity
 @Table(name = "player_stats")
 public class PlayerStatsEntity {
-  @Id
-  private String id;
+  @Id private String id;
   private int wins;
   private int rank;
   private int score;
@@ -19,11 +18,11 @@ public class PlayerStatsEntity {
   private int totalLose;
   private int totalDraw;
   private int totalError;
+
   @OneToOne(mappedBy = "stats")
   private PlayerEntity player;
 
-  public PlayerStatsEntity() {
-  }
+  public PlayerStatsEntity() {}
 
   public static PlayerStatsEntity of() {
     String id = UUID.randomUUID().toString();
@@ -148,8 +147,7 @@ public class PlayerStatsEntity {
     private int totalError;
     private PlayerEntity player;
 
-    private PlayerStatsEntityBuilder() {
-    }
+    private PlayerStatsEntityBuilder() {}
 
     public static PlayerStatsEntityBuilder builder() {
       return new PlayerStatsEntityBuilder();

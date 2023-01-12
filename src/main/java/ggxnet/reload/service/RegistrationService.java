@@ -18,7 +18,8 @@ public class RegistrationService {
 
   public void registerUser(UserDto newUser) {
     if (userRepository.existsByUsername(newUser.getName())) {
-      throw new UserAlreadyExistsException("User with name: " + newUser.getName() + " already exists");
+      throw new UserAlreadyExistsException(
+          "User with name: " + newUser.getName() + " already exists");
     }
     UserEntity userEntity = new UserEntity();
     userEntity.setUsername(newUser.getName());
