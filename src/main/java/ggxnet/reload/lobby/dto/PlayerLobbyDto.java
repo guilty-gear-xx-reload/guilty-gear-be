@@ -3,18 +3,23 @@ package ggxnet.reload.lobby.dto;
 import ggxnet.reload.player.config.entity.PlayerConfigEntity;
 import ggxnet.reload.player.entity.PlayerEntity;
 import ggxnet.reload.player.statistic.entity.PlayerStatsEntity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Objects;
 
-public final class PlayerLobbyDto {
-  private final String id;
-  private final String nickname;
-  private final Boolean status;
-  private final String ping;
-  private final Integer totalWins;
-  private final Integer totalLoses;
-  private final Integer totalDraws;
-  private final Integer totalGames;
-  private final Double winToLoses;
+@Data
+@NoArgsConstructor
+public class PlayerLobbyDto {
+  private String id;
+  private String nickname;
+  private Boolean status;
+  private String ping;
+  private Integer totalWins;
+  private Integer totalLoses;
+  private Integer totalDraws;
+  private Integer totalGames;
+  private Double winToLoses;
 
   public PlayerLobbyDto(
       String id,
@@ -97,9 +102,11 @@ public final class PlayerLobbyDto {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == this) return true;
-    if (obj == null || obj.getClass() != this.getClass()) return false;
-    var that = (PlayerLobbyDto) obj;
+    if (obj == this)
+      return true;
+    if (obj == null || obj.getClass() != this.getClass())
+      return false;
+    var that = (PlayerLobbyDto)obj;
     return Objects.equals(this.id, that.id)
         && Objects.equals(this.nickname, that.nickname)
         && Objects.equals(this.status, that.status)

@@ -30,14 +30,14 @@ class RegistrationController {
   @PostMapping("/register")
   public String registerUser(
       @ModelAttribute UserDto user, Model model, RedirectAttributes redirectAttributes) {
-    if (StringUtils.isEmptyOrWhitespace(user.getName())
+    if (StringUtils.isEmptyOrWhitespace(user.getUsername())
         || StringUtils.isEmptyOrWhitespace(user.getPassword())) {
       model.addAttribute("errorMessage", "Username or password cannot be empty");
       model.addAttribute("user", user);
       return "/registration";
     }
     registrationService.registerUser(user);
-    redirectAttributes.addFlashAttribute("userName", user.getName());
+    redirectAttributes.addFlashAttribute("userName", user.getUsername());
     return "redirect:/login";
   }
 }
