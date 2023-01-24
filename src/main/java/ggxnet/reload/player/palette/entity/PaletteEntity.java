@@ -1,6 +1,5 @@
 package ggxnet.reload.player.palette.entity;
 
-import ggxnet.reload.player.palette.dto.RGBa;
 import java.util.List;
 import javax.persistence.*;
 
@@ -18,7 +17,7 @@ public class PaletteEntity {
 
   @ElementCollection
   @CollectionTable(name = "palette_colors", joinColumns = @JoinColumn(name = "palette_id"))
-  private List<RGBa> colors;
+  private List<RGBA> colors;
 
   private long fileSizeInBytes;
 
@@ -35,10 +34,6 @@ public class PaletteEntity {
     return id;
   }
 
-  public void setId(long id) {
-    this.id = id;
-  }
-
   public String getHeader() {
     return header;
   }
@@ -47,11 +42,11 @@ public class PaletteEntity {
     this.header = header;
   }
 
-  public List<RGBa> getColors() {
+  public List<RGBA> getColors() {
     return colors;
   }
 
-  public void setColors(List<RGBa> colors) {
+  public void setColors(List<RGBA> colors) {
     this.colors = colors;
   }
 

@@ -1,22 +1,7 @@
 package ggxnet.reload.player.palette;
 
-import ggxnet.reload.player.palette.dto.PaletteRGBa;
-import ggxnet.reload.player.palette.entity.CharacterEntity;
-import ggxnet.reload.player.palette.entity.PaletteEntity;
-import ggxnet.reload.player.palette.entity.PaletteType;
-import ggxnet.reload.player.palette.entity.SpriteEntity;
-import ggxnet.reload.player.palette.repository.CharacterRepository;
-import ggxnet.reload.player.palette.repository.PaletteRepository;
-import ggxnet.reload.player.palette.repository.SpriteRepository;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import ggxnet.reload.player.palette.dto.PaletteRGBA;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collections;
 import java.util.List;
 import java.util.zip.Deflater;
 import lombok.RequiredArgsConstructor;
@@ -26,17 +11,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PaletteConverter {
 
-  private final CharacterRepository characterRepository;
-  private final PaletteRepository paletteRepository;
-  private final SpriteRepository spriteRepository;
-
   public static final int PALETTE_SIZE_IN_BYTES = 1040;
 
-  public byte[] convertPaletteFromRgbToBinary(PaletteRGBa paletteRGBa) {
+  public byte[] convertPaletteFromRgbToBinary(PaletteRGBA paletteRGBA) {
     // convert to rgb
     List<Byte> binaryPalette = new ArrayList<>(PALETTE_SIZE_IN_BYTES);
-    for (int i = 0; i < paletteRGBa.rgba().size(); i++) {
-      var rgba = paletteRGBa.rgba().get(i);
+    for (int i = 0; i < paletteRGBA.rgba().size(); i++) {
+      var rgba = paletteRGBA.rgba().get(i);
       binaryPalette.add((byte) rgba.getR());
       binaryPalette.add((byte) rgba.getG());
       binaryPalette.add((byte) rgba.getB());
@@ -44,7 +25,7 @@ public class PaletteConverter {
     }
 
     // add header
-    binaryPalette.addAll(0, paletteRGBa.header());
+    binaryPalette.addAll(0, paletteRGBA.header());
 
     // compress
     Deflater deflater = new Deflater();
@@ -88,70 +69,5 @@ public class PaletteConverter {
       binaryPaletteByte[i] = binaryPalette.get(i);
     }
     return binaryPaletteByte;
-  }
-
-  public static PaletteRGBa readData(String filename) throws Exception {
-    try (FileInputStream fileInputStream = new FileInputStream(filename);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-      return (PaletteRGBa) objectInputStream.readObject();
-    }
-  }
-
-  public void importAll() throws IOException {
-    String palettePath = "default_palettes";
-    File paletteFolder = new File(palettePath);
-    File[] listOfFilesPalette = paletteFolder.listFiles();
-    for (File paletteFile : listOfFilesPalette) {
-      PaletteEntity paletteEntity = new PaletteEntity();
-
-      CharacterEntity characterEntity = new CharacterEntity();
-      CharacterEntity savedCharacterEntity = characterRepository.save(characterEntity);
-      String characterName = paletteFile.getName().split("_")[0];
-      savedCharacterEntity.setName(characterName);
-      String filename = paletteFile.getName();
-      PaletteRGBa paletteRGBa = null;
-      try {
-        paletteRGBa = readData(palettePath + "\\" + filename);
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
-      byte[] header = new byte[paletteRGBa.header().size()];
-      for (int i = 0; i < paletteRGBa.header().size(); i++) {
-        header[i] = paletteRGBa.header().get(i);
-      }
-      String byteHeader = Base64.getEncoder().encodeToString(header);
-      paletteEntity.setHeader(byteHeader);
-      paletteEntity.setColors(paletteRGBa.rgba());
-      paletteEntity.setFileSizeInBytes(paletteFile.length());
-      paletteEntity.setPaletteType(PaletteType.DEFAULT);
-      paletteEntity.setCharacter(characterEntity);
-      paletteRepository.save(paletteEntity);
-      savedCharacterEntity.setPalettes(Collections.singletonList(paletteEntity));
-      characterEntity.setPalettes(Collections.singletonList(paletteEntity));
-
-      List<SpriteEntity> spriteEntities = new ArrayList<>();
-      String path = "scrap\\" + characterName;
-      File binFolder = new File(path);
-      for (File innerFile : binFolder.listFiles()) {
-        String binFile = innerFile.getName();
-        int postureId = Integer.parseInt(binFile.split("_")[0].split(".bin")[0]);
-        int width = Integer.parseInt(binFile.split("_")[1].split(".bin")[0]);
-        int height = Integer.parseInt(binFile.split("_")[2].split(".bin")[0]);
-
-        SpriteEntity spriteEntity = new SpriteEntity();
-        spriteEntity.setWidth(width);
-        spriteEntity.setHeight(height);
-        spriteEntity.setFileSizeInBytes(innerFile.length());
-        spriteEntity.setPostureId(postureId);
-
-        byte[] bytes = Files.readAllBytes(Path.of(innerFile.getAbsolutePath()));
-        String base64 = Base64.getEncoder().encodeToString(bytes);
-        spriteEntity.setColorIndexes(base64);
-        spriteEntities.add(spriteEntity);
-        spriteEntity.setCharacter(characterEntity);
-      }
-      spriteRepository.saveAll(spriteEntities);
-      savedCharacterEntity.setSprites(spriteEntities);
-    }
   }
 }

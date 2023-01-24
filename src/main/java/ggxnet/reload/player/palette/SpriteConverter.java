@@ -1,10 +1,6 @@
 package ggxnet.reload.player.palette;
 
-import ggxnet.reload.player.palette.dto.PaletteRGBa;
-import ggxnet.reload.player.palette.dto.RGBa;
-import ggxnet.reload.player.palette.repository.CharacterRepository;
-import ggxnet.reload.player.palette.repository.PaletteRepository;
-import ggxnet.reload.player.palette.repository.SpriteRepository;
+import ggxnet.reload.player.palette.dto.PaletteRGBA;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,23 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SpriteConverter {
 
-  private final PaletteRepository paletteRepository;
-  private final SpriteRepository spriteRepository;
-  private final CharacterRepository characterRepository;
-
-  public SpriteConverter(
-      PaletteRepository paletteRepository,
-      SpriteRepository spriteRepository,
-      CharacterRepository characterRepository) {
-    this.paletteRepository = paletteRepository;
-    this.spriteRepository = spriteRepository;
-    this.characterRepository = characterRepository;
-  }
-
-  public static void main(String[] args) throws Exception {}
-
   public static List<Short> convertSpriteFromBinaryToRgb(
-      String binPath, int spriteWidth, int spriteHeight, List<RGBa> rgbPalette) throws IOException {
+      String binPath, int spriteWidth, int spriteHeight) throws IOException {
     List<Short> rgbSprite = new ArrayList<>();
     byte[] binarySprite = Files.readAllBytes(Paths.get(binPath));
 
@@ -52,10 +33,10 @@ public class SpriteConverter {
     return rgbSprite;
   }
 
-  public static PaletteRGBa readData(String filename) throws Exception {
+  public static PaletteRGBA readData(String filename) throws Exception {
     try (FileInputStream fileInputStream = new FileInputStream(filename);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-      return (PaletteRGBa) objectInputStream.readObject();
+      return (PaletteRGBA) objectInputStream.readObject();
     }
   }
 

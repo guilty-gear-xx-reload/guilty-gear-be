@@ -13,4 +13,6 @@ public interface PlayerPaletteRepository extends CrudRepository<PlayerPaletteEnt
       PlayerEntity player, String characterName);
 
   List<PlayerPaletteEntity> findAllByPlayer(PlayerEntity player);
+
+  void deleteByPaletteId(Long id);
 }

@@ -4,11 +4,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import ggxnet.reload.player.palette.dto.CommandPaletteColorsDto;
 import ggxnet.reload.player.palette.dto.PaletteColorsDto;
-import ggxnet.reload.player.palette.dto.PaletteRGBa;
-import ggxnet.reload.player.palette.dto.RGBa;
+import ggxnet.reload.player.palette.dto.PaletteColorsWithNameDto;
+import ggxnet.reload.player.palette.dto.PaletteRGBA;
 import ggxnet.reload.player.palette.entity.PaletteEntity;
 import ggxnet.reload.player.palette.entity.PaletteType;
 import ggxnet.reload.player.palette.entity.PlayerPaletteEntity;
+import ggxnet.reload.player.palette.entity.RGBA;
 import ggxnet.reload.player.palette.repository.CharacterRepository;
 import ggxnet.reload.player.palette.repository.PaletteRepository;
 import ggxnet.reload.player.palette.repository.PlayerPaletteRepository;
@@ -17,6 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,7 +35,7 @@ public class PaletteService {
   private final PaletteConverter paletteConverter;
 
   public PaletteColorsDto getPalette(String characterName) {
-    List<RGBa> rgbaList =
+    List<RGBA> rgbaList =
         paletteRepository
             .findByCharacterNameAndPaletteType(characterName, PaletteType.DEFAULT)
             .orElseThrow(() -> new ResponseStatusException(NOT_FOUND))
@@ -41,11 +43,11 @@ public class PaletteService {
     return new PaletteColorsDto(rgbaList);
   }
 
-  public void savePalette(
-      CommandPaletteColorsDto commandPaletteColorsDto, String characterName, String username) {
+  public Long savePalette(CommandPaletteColorsDto commandPaletteColorsDto, String username) {
     var palette = new PaletteEntity();
 
-    var character = characterRepository.findByName(characterName).orElseThrow();
+    var character =
+        characterRepository.findByName(commandPaletteColorsDto.characterName()).orElseThrow();
     var header =
         paletteRepository
             .findByCharacterAndPaletteType(character, PaletteType.DEFAULT)
@@ -65,7 +67,7 @@ public class PaletteService {
     var playerPaletteEntity = new PlayerPaletteEntity();
     playerPaletteEntity.setPalette(persistedPalette);
     playerPaletteEntity.setPlayer(player);
-    playerPaletteRepository.save(playerPaletteEntity);
+    return playerPaletteRepository.save(playerPaletteEntity).getId();
   }
 
   public Map<Long, String> getPlayerPaletteNames(String characterName, String username) {
@@ -107,8 +109,8 @@ public class PaletteService {
   private byte[] convertToByte(PaletteEntity palette) {
     byte[] bytes = Base64.getDecoder().decode(palette.getHeader().getBytes());
     List<Byte> headersByte = toByteList(bytes);
-    var paletteRGBa = new PaletteRGBa(headersByte, palette.getColors());
-    return paletteConverter.convertPaletteFromRgbToBinary(paletteRGBa);
+    var paletteRGBA = new PaletteRGBA(headersByte, palette.getColors());
+    return paletteConverter.convertPaletteFromRgbToBinary(paletteRGBA);
   }
 
   private List<Byte> toByteList(byte[] bytes) {
@@ -121,5 +123,35 @@ public class PaletteService {
 
   private String getCharacterName(PaletteEntity palette) {
     return palette.getCharacter().getName();
+  }
+
+  public List<PaletteColorsWithNameDto> getCustomPalettes(String characterName, String username) {
+    var player = playerRepository.findByUserUsername(username).orElseThrow();
+    return playerPaletteRepository
+        .findAllByPlayerAndPaletteCharacterName(player, characterName)
+        .stream()
+        .map(
+            playerPalette ->
+                new PaletteColorsWithNameDto(
+                    playerPalette.getId(),
+                    playerPalette.getPalette().getColors(),
+                    playerPalette.getPalette().getName()))
+        .toList();
+  }
+
+  @Transactional
+  public void updatePalette(Long id, CommandPaletteColorsDto commandPaletteColorsDto) {
+    var playerPalette = playerPaletteRepository.findById(id).orElseThrow(RuntimeException::new);
+    var palette = playerPalette.getPalette();
+    palette.setColors(commandPaletteColorsDto.rgba());
+    palette.setName(commandPaletteColorsDto.paletteName());
+  }
+
+  @Transactional
+  public void deletePalette(Long id) {
+    var playerPalette = playerPaletteRepository.findById(id).get();
+    var palette = playerPalette.getPalette();
+    playerPaletteRepository.deleteById(id);
+    paletteRepository.delete(palette);
   }
 }

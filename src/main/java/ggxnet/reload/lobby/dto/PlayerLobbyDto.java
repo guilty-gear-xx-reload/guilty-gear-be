@@ -4,17 +4,21 @@ import ggxnet.reload.player.config.entity.PlayerConfigEntity;
 import ggxnet.reload.player.entity.PlayerEntity;
 import ggxnet.reload.player.statistic.entity.PlayerStatsEntity;
 import java.util.Objects;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public final class PlayerLobbyDto {
-  private final String id;
-  private final String nickname;
-  private final Boolean status;
-  private final String ping;
-  private final Integer totalWins;
-  private final Integer totalLoses;
-  private final Integer totalDraws;
-  private final Integer totalGames;
-  private final Double winToLoses;
+@Data
+@NoArgsConstructor
+public class PlayerLobbyDto {
+  private String id;
+  private String nickname;
+  private Boolean status;
+  private String ping;
+  private Integer totalWins;
+  private Integer totalLoses;
+  private Integer totalDraws;
+  private Integer totalGames;
+  private Double winToLoses;
 
   public PlayerLobbyDto(
       String id,
