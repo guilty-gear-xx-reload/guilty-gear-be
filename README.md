@@ -4,7 +4,7 @@
 
 ### Requirements
 
-- MonggoDB
+- Postgres 14.0
 - set VM option -Dspring.profiles.active=dev
 - create account on /registration page
 
