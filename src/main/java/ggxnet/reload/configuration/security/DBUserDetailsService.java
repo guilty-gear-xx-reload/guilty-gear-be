@@ -1,7 +1,6 @@
 package ggxnet.reload.configuration.security;
 
 import ggxnet.reload.configuration.security.entity.UserEntity;
-import ggxnet.reload.configuration.security.repository.UserRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

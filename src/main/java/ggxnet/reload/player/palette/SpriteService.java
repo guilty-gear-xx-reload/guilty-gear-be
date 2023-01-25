@@ -3,8 +3,6 @@ package ggxnet.reload.player.palette;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import ggxnet.reload.player.palette.dto.SpriteColorIndexesDto;
-import ggxnet.reload.player.palette.repository.CharacterRepository;
-import ggxnet.reload.player.palette.repository.SpriteRepository;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;

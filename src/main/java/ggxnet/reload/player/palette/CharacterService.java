@@ -3,8 +3,6 @@ package ggxnet.reload.player.palette;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import ggxnet.reload.player.palette.entity.CharacterEntity;
-import ggxnet.reload.player.palette.repository.CharacterRepository;
-import ggxnet.reload.player.palette.repository.SpriteRepository;
 import java.util.List;
 import java.util.stream.StreamSupport;
 import lombok.RequiredArgsConstructor;
