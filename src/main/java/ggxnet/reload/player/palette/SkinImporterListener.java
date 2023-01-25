@@ -1,9 +1,6 @@
 package ggxnet.reload.player.palette;
 
 import ggxnet.reload.player.palette.entity.PaletteType;
-import ggxnet.reload.player.palette.repository.CharacterRepository;
-import ggxnet.reload.player.palette.repository.PaletteRepository;
-import ggxnet.reload.player.palette.repository.SpriteRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;

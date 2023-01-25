@@ -2,6 +2,7 @@ package ggxnet.reload.player.palette;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+import ggxnet.reload.player.PlayerRepository;
 import ggxnet.reload.player.palette.dto.CommandPaletteColorsDto;
 import ggxnet.reload.player.palette.dto.PaletteColorsDto;
 import ggxnet.reload.player.palette.dto.PaletteColorsWithNameDto;
@@ -10,10 +11,6 @@ import ggxnet.reload.player.palette.entity.PaletteEntity;
 import ggxnet.reload.player.palette.entity.PaletteType;
 import ggxnet.reload.player.palette.entity.PlayerPaletteEntity;
 import ggxnet.reload.player.palette.entity.RGBA;
-import ggxnet.reload.player.palette.repository.CharacterRepository;
-import ggxnet.reload.player.palette.repository.PaletteRepository;
-import ggxnet.reload.player.palette.repository.PlayerPaletteRepository;
-import ggxnet.reload.player.repository.PlayerRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

@@ -2,7 +2,7 @@ package ggxnet.reload.player;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-import ggxnet.reload.player.config.repository.PlayerConfigRepository;
+import ggxnet.reload.player.config.PlayerConfigRepository;
 import java.time.Instant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

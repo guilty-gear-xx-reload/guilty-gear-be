@@ -3,8 +3,8 @@ package ggxnet.reload.lobby;
 import static java.util.stream.Collectors.toList;
 
 import ggxnet.reload.lobby.dto.PlayerLobbyDto;
-import ggxnet.reload.player.config.repository.PlayerConfigRepository;
-import ggxnet.reload.player.repository.PlayerRepository;
+import ggxnet.reload.player.PlayerRepository;
+import ggxnet.reload.player.config.PlayerConfigRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
